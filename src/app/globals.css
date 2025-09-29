@@ -18,7 +18,8 @@
   --foreground: hsl(222 84% 5%);
 
   /* brand — tetap sama di dark */
-  --primary: hsl(210 92% 38%);        /* #0861BB */
+  --primary: hsl(210 92% 38%);
+  /* #0861BB */
   --primary-foreground: hsl(0 0% 100%);
 
   /* surfaces */
@@ -46,7 +47,8 @@
 }
 
 /* DARK overrides – cukup ubah BASE TOKENS di atas */
-:root.dark, .dark {
+:root.dark,
+.dark {
   --background: hsl(222 84% 5%);
   --foreground: hsl(210 40% 98%);
 
@@ -110,13 +112,133 @@
 
 /* Base reset agar seluruh halaman pakai token */
 @layer base {
-  * { @apply border-border; }
-  html { scroll-behavior: smooth; }
-  body { @apply bg-background text-foreground; }
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+
+  .heading-page {
+    @apply font-bold leading-tight text-black text-[24px] md:text-[40px] lg:text-[48px];
+  }
+
+  /* Standar Subjudul Page */
+  .subheading-page {
+    @apply font-medium text-black text-[16px] md:text-[18px] lg:text-[20px];
+  }
 }
 
-/* helper class kalau mau dipakai ulang */
-/* @media (max-width: 849px) {
-  .only-mobile { display: contents; } 
+/* ========= UTILITAS GLOBAL TAMBAHAN (AMAN) ========= */
+
+/* 1) Glass layer reusable (dipakai navbar, chip, panel search, dll) */
+@utility glass {
+  background-color: hsl(var(--color-background) / 0.40);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid hsl(0 0% 100% / 0.15);
 }
- */
+
+.dark .glass {
+  background-color: hsl(0 0% 0% / 0.30);
+  border-color: hsl(0 0% 100% / 0.12);
+}
+
+/* 2) Container konsisten (Tailwind v4 tidak bundle plugin container) */
+@utility app-container {
+  max-width: 1200px;
+  width: 100%;
+  margin-inline: auto;
+  padding-inline: 1rem;
+  /* 16px */
+}
+
+@media (min-width: 850px) {
+  .app-container {
+    padding-inline: 1.5rem;
+  }
+
+  /* 24px */
+}
+
+@media (min-width: 1200px) {
+  .app-container {
+    padding-inline: 2rem;
+  }
+
+  /* 32px */
+}
+
+/* 3) Section spacing + scroll offset agar tidak ketutup header */
+:root {
+  --header-h: 104px;
+}
+
+/* sesuaikan tinggi header final */
+@media (min-width: 1024px) {
+  :root {
+    --header-h: 104px;
+  }
+}
+
+@utility section-pad {
+  padding-block: 4rem;
+  /* 64px default section spacing */
+}
+
+@media (min-width: 850px) {
+  .section-pad {
+    padding-block: 6rem;
+  }
+
+  /* 96px tablet/desktop */
+}
+
+@utility section-anchor {
+  scroll-margin-top: var(--header-h);
+}
+
+/* 4) Brand helper kalau butuh warna biru konsisten via util */
+@utility text-brand {
+  color: hsl(var(--primary));
+}
+
+@utility bg-brand {
+  background-color: hsl(var(--primary));
+}
+
+@utility ring-brand {
+  --tw-ring-color: hsl(var(--ring));
+}
+
+/* 5) Radius helper mengikuti token */
+@utility rounded-lg-token {
+  border-radius: var(--radius);
+}
+
+@utility rounded-md-token {
+  border-radius: var(--radius-md);
+}
+
+@utility rounded-sm-token {
+  border-radius: var(--radius-sm);
+}
+
+/* tailwind globals */
+@layer utilities {
+  .world-dots {
+    mask-image: url(/images/world-dots.svg);
+    -webkit-mask-image: url(/images/world-dots.svg);
+    mask-repeat: no-repeat;
+    -webkit-mask-repeat: no-repeat;
+    mask-position: top center;
+    -webkit-mask-position: top center;
+    mask-size: contain;
+    -webkit-mask-size: contain;
+  }
+}

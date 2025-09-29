@@ -13,9 +13,13 @@ export default function ModeToggle() {
       type="button"
       variant="outline"
       size="icon"
-      className="h-12 w-12 rounded-2xl bg-primary/10 border-white/60 dark:border-white/30"
       aria-label="Toggle theme"
       onClick={() => setTheme(isDark ? "light" : "dark")}
+      className="
+        h-14 w-14 p-0                      /* 56×56px */
+        rounded-md border
+        glass
+      "
     >
       <Sun className="h-5 w-5 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
       <Moon className="absolute h-5 w-5 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />

@@ -1,5 +1,6 @@
 "use client"
 
+import { useEffect, useRef, useState } from "react"
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs"
 import { Card } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -8,42 +9,138 @@ import QuickSearchForm from "@/features/search/QuickSearchForm"
 import { Send } from "lucide-react"
 
 export default function SearchBox() {
+  const [tab, setTab] = useState<"ask" | "quick">("ask")
+  const boxRef = useRef<HTMLDivElement>(null)
+
+  // Scroll helper (tetap sama seperti sebelumnya)
+  useEffect(() => {
+    const id = window.requestAnimationFrame(() => {
+      if (tab === "quick") {
+        const el = boxRef.current
+        if (!el) return
+        const rect = el.getBoundingClientRect()
+        const vpH = window.innerHeight
+        const pad = 24
+        const overflowBottom = rect.bottom - vpH
+        if (overflowBottom > 0) {
+          window.scrollBy({ top: overflowBottom + pad, behavior: "smooth" })
+          return
+        }
+        const headerOffset = 96
+        const overflowTop = headerOffset - rect.top
+        if (overflowTop > 0) {
+          window.scrollBy({ top: -overflowTop - 12, behavior: "smooth" })
+        }
+      } else {
+        window.scrollTo({ top: 0, behavior: "smooth" })
+      }
+    })
+    return () => window.cancelAnimationFrame(id)
+  }, [tab])
+
   return (
-    <div className="w-full max-w-3xl">
-      {/* Bingkai biru + tab header */}
-      <div className="rounded-2xl bg-primary text-primary-foreground shadow-lg">
-        <div className="px-6 py-4 text-sm">Hi, what can velogo help you with?</div>
+    <div ref={boxRef} className="w-full max-w-3xl">
+      {/* Bingkai biru utama */}
+      <div className="rounded-2xl bg-primary text-primary-foreground shadow-lg overflow-hidden">
+        {/* === HEADER RESPONSIVE (mobile center, md+ row) === */}
+        <div
+          className="
+    px-4 md:pl-6 md:pr-0 py-4
+    flex flex-col md:flex-row
+    items-center md:items-center
+    gap-3 md:gap-4
+  "
+        >
+          {/* Title: 14px mobile (center), 16px md+ (left) */}
+          <div className="text-[14px] md:text-[16px] font-semibold text-center md:text-left">
+            Hi, what can velogo help you with?
+          </div>
 
-        <div className="bg-primary/90 rounded-b-2xl p-4">
-          <Tabs defaultValue="ask" className="w-full">
-            <div className="flex justify-end pr-1">
-              <TabsList className="bg-background/60">
-                <TabsTrigger value="ask" className="data-[state=active]:bg-background data-[state=active]:text-foreground rounded-full">
-                  Ask Velogo
-                </TabsTrigger>
-                <TabsTrigger value="quick" className="data-[state=active]:bg-background data-[state=active]:text-foreground rounded-full">
-                  Quick Search
-                </TabsTrigger>
-              </TabsList>
-            </div>
+          {/* Tabs: full width & centered on mobile, pushed right on md+ */}
+          <Tabs
+            value={tab}
+            onValueChange={(v) => setTab(v as any)}
+            className="w-full md:w-auto md:ml-auto md:mr-10"
+          >
+            <TabsList
+              className="
+        bg-white dark:bg-black text-foreground w-full md:w-[262px] h-[60px] md:h-[69px] rounded-2xl p-2 flex items-center justify-between gap-2 shadow-sm"
+            >
+              <TabsTrigger
+                value="ask"
+                className="
+          w-1/2 md:w-[116px] h-[42px] md:h-[45px] rounded-full
+          text-[12px] md:text-[14px] font-medium
+          data-[state=inactive]:bg-transparent data-[state=inactive]:text-foreground
+          data-[state=active]:!bg-primary data-[state=active]:!text-primary-foreground
+          data-[state=active]:border data-[state=active]:border-primary
+          transition-colors
+        "
+              >
+                Ask Velogo
+              </TabsTrigger>
 
-            {/* ASK */}
-            <TabsContent value="ask" className="mt-4">
-              <Card className="rounded-2xl">
-                <div className="p-4 flex items-center gap-2">
+              <TabsTrigger
+                value="quick"
+                className="
+                  w-1/2 md:w-[116px] h-[42px] md:h-[45px] rounded-full
+                  text-[12px] md:text-[14px] font-medium
+                  data-[state=inactive]:bg-transparent data-[state=inactive]:text-foreground
+                  data-[state=active]:!bg-primary data-[state=active]:!text-primary-foreground
+                  data-[state=active]:border data-[state=active]:border-primary
+                  transition-colors
+        "
+              >
+                Quick Search
+              </TabsTrigger>
+            </TabsList>
+          </Tabs>
+        </div>
+
+
+
+        {/* === BODY: PUTIH SEMUA === */}
+        <div className="bg-white dark:bg-black dark:text-white rounded-b-2xl p-4">
+          <Tabs value={tab} onValueChange={(v) => setTab(v as any)} className="w-full">
+            {/* ASK (tetap putih) */}
+            <TabsContent value="ask" className="mt-0">
+              <form
+                className="p-4"
+                onSubmit={(e) => {
+                  e.preventDefault()
+                  // TODO: handle submit di sini
+                }}
+              >
+                <div className="relative">
+                  {/* Input: tambah pr agar tidak ketutup tombol */}
                   <Input
                     placeholder="Enter an address, city, or property type..."
-                    className="flex-1 h-12 rounded-xl"
+                    className="
+          h-16 w-full rounded-2xl
+          pr-16
+        "
                   />
-                  <Button size="icon" className="rounded-xl h-12 w-12" aria-label="Send">
+
+                  {/* Tombol: posisi di dalam input kanan */}
+                  <Button
+                    type="submit"
+                    size="icon"
+                    aria-label="Send"
+                    className="
+          absolute right-2 top-1/2 -translate-y-1/2
+          h-12 w-12 rounded-xl
+          shadow
+        "
+                  >
                     <Send className="h-5 w-5" />
                   </Button>
                 </div>
-              </Card>
+              </form>
             </TabsContent>
 
-            {/* QUICK SEARCH */}
-            <TabsContent value="quick" className="mt-4">
+
+            {/* QUICK SEARCH (PUTIH SEMUA) */}
+            <TabsContent value="quick" className="mt-0">
               <QuickSearchForm />
             </TabsContent>
           </Tabs>

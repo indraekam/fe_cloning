@@ -1,47 +1,92 @@
+// Hero.tsx
 import Image from "next/image"
-import { cn } from "@/lib/utils"
 import SearchBox from "@/features/search/SearchBox"
-import Header from "@/components/layout/Header"
 
 export default function Hero() {
   return (
-    <section id="hero" className="relative">
-      {/* background hero di belakang SEMUA isi section (termasuk header) */}
+    <section id="hero" className="relative section-anchor">
+      {/* === BACKGROUND IMAGE + WHITE FOG OVERLAY === */}
       <div className="absolute inset-0 -z-10">
-        <div className="absolute inset-0 bg-gradient-to-b from-background/20 to-background/80 z-10" />
         <Image
           src="/images/Head.jpg"
           alt="City skyline"
           fill
           priority
-          className={cn("object-cover")}
           sizes="100vw"
+          className="object-cover"
         />
+        <div className="absolute inset-0 bg-white/40 backdrop-blur-[2px]" />
       </div>
 
-      {/* HEADER jadi bagian dari hero */}
-      {/* <Header /> */}
+      {/* Offset header */}
+      <div className="pt-[184px]" />
 
-      {/* Konten hero */}
-      <div className="container pt-20 md:pt-24 pb-16 md:pb-24">
-        <div className="mx-auto mt-6 w-fit rounded-full bg-background/70 backdrop-blur px-4 py-2 text-xs md:text-sm border shadow-sm">
-          ✨ Era Baru Properti Dimulai Sekarang
+      <div
+        className="
+          app-container
+          flex min-h-[796px] flex-col items-center
+          pb-12
+        "
+      >
+        {/* === CHIP === */}
+        <div
+          className="
+    inline-flex items-center justify-center gap-2
+    w-[270px] h-[37px]           /* mobile: 270x37 */
+    rounded-[32px]
+    bg-white/10 backdrop-blur-md
+    border border-cyan-300/40
+    shadow-[0_1px_0_0_rgba(255,255,255,0.6)_inset,0_1px_6px_rgba(0,0,0,0.08)]
+    md:w-auto md:h-auto          /* tablet+: kembali ke auto */
+    md:px-5 md:py-2.5
+  "
+        >
+          <img src="/icons/sparkle.svg" alt="" className="h-4 w-4 opacity-80 md:h-5 md:w-5" />
+          <span
+            className="
+      text-[14px]                 /* mobile: 14px */
+      md:text-[16px]              /* tablet+: 16px (tidak berubah) */
+    "
+            style={{ color: "#121212CC" }}
+          >
+            The Future of Real Estate is Here
+          </span>
         </div>
 
-        <div className="mt-6 text-center">
-          <h1 className="text-4xl md:text-6xl font-semibold tracking-tight">
-            AI Tools paling powerful untuk bantu Anda<br className="hidden md:block" />
-            berkembang lebih cepat dan lebih efisien
+        {/* === HEADING + SUBTITLE (center, warna hitam) === */}
+        <div className="mt-4 md:mt-6 text-center">
+          <h1
+            className="
+      heading-page
+      font-bold leading-tight text-black
+    "
+          >
+            Your Most Powerful AI Tool to Grow Smarter,
+            <br className="hidden md:block" />
+            Faster, and Bigger
           </h1>
-          <p className="mt-4 text-base md:text-lg text-muted-foreground">
-            Tools properti berbasis AI yang dirancang untuk memudahkan perjalanan Anda mulai
-            dari cari properti relevan, kelola leads, analisis tren pasar, sampai closing transaksi.
+
+          <p
+            className="
+      mx-auto mt-3 md:mt-4
+      max-w-7xl
+      subheading-page
+      font-bold text-black
+    "
+          >
+            AI-powered Real Estate tools designed to manage end-end journey from
+            finding relevant properties and handling leads to analyzing market
+            trends and driving conversions.
           </p>
         </div>
 
-        <div className="mt-8 md:mt-10 flex justify-center">
+
+        {/* SEARCH PANEL */}
+        <div className="mt-8 md:mt-10 w-full flex justify-center">
           <SearchBox />
         </div>
+
+        {/* (hapus) <div className="grow" /> */}
       </div>
     </section>
   )
