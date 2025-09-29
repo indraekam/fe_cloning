@@ -20,10 +20,10 @@ export default function Hero() {
       </div>
 
       {/* HEADER jadi bagian dari hero */}
-      <Header />
+      {/* <Header /> */}
 
       {/* Konten hero */}
-      <div className="container pb-16 md:pb-24">
+      <div className="container pt-20 md:pt-24 pb-16 md:pb-24">
         <div className="mx-auto mt-6 w-fit rounded-full bg-background/70 backdrop-blur px-4 py-2 text-xs md:text-sm border shadow-sm">
           ✨ Era Baru Properti Dimulai Sekarang
         </div>

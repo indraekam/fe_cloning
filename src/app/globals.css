@@ -111,5 +111,12 @@
 /* Base reset agar seluruh halaman pakai token */
 @layer base {
   * { @apply border-border; }
+  html { scroll-behavior: smooth; }
   body { @apply bg-background text-foreground; }
 }
+
+/* helper class kalau mau dipakai ulang */
+/* @media (max-width: 849px) {
+  .only-mobile { display: contents; } 
+}
+ */

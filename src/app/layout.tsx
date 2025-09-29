@@ -3,6 +3,7 @@ import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import { cn } from "@/lib/utils"
 import WhatsAppFloat from "@/components/common/WhatsAppFloat"
+import Header from "@/components/layout/Header"
 import { GeistSans } from "geist/font/sans"
 
 export const metadata: Metadata = {
@@ -15,6 +16,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" suppressHydrationWarning>
       <body className={cn(GeistSans.className, "min-h-dvh antialiased")}>
         <ThemeProvider>
+          <Header />
           {children}
           <WhatsAppFloat />
         </ThemeProvider>
