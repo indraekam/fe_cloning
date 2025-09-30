@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react"
 import Link from "next/link"
+import Image from "next/image"
 
 type StatItem = { label: string; value: number; suffix?: string }
 
@@ -12,30 +13,20 @@ const STATS: StatItem[] = [
   { label: "Access Channels", value: 2 },
 ]
 
-// Easing biar animasi halus
 const easeOutCubic = (t: number) => 1 - Math.pow(1 - t, 3)
 
 export default function EarlyAccess() {
   const sectionRef = useRef<HTMLElement>(null)
   const [start, setStart] = useState(false)
 
-  // Mulai animasi ketika 40% section terlihat
   useEffect(() => {
     const el = sectionRef.current
     if (!el) return
-
     const media = window.matchMedia("(prefers-reduced-motion: reduce)")
-    if (media.matches) {
-      setStart(true)
-      return
-    }
-
+    if (media.matches) { setStart(true); return }
     const io = new IntersectionObserver(
       (entries) => {
-        if (entries[0]?.isIntersecting) {
-          setStart(true)
-          io.disconnect()
-        }
+        if (entries[0]?.isIntersecting) { setStart(true); io.disconnect() }
       },
       { threshold: 0.4 }
     )
@@ -47,50 +38,59 @@ export default function EarlyAccess() {
     <section
       id="early-access"
       ref={sectionRef}
-      className="relative overflow-visible min-h-[400px] mt-16 md:mt-24 mb-8 md:mb-16" // ⬅️ DIPENDEKKAN
+      className="relative overflow-visible min-h-[400px] mt-16 md:mt-24 mb-8 md:mb-16"
     >
-      <div
-        className="
-          app-container relative max-w-7xl mx-auto px-4 py-8 md:py-10 min-h-[400px] flex flex-col justify-start
-        "
-      >
-        {/* BG world map — background KONTEN, top sejajar heading */}
-        <div
-          aria-hidden
+      <div className="app-container relative max-w-7xl mx-auto px-4 py-1 md:py-2 min-h-[400px] lg:py-4 min-h-[400px]flex flex-col justify-start">
+        {/* Heading: diberi jarak aman dari peta di tablet/desktop */}
+        <h2
           className="
-            pointer-events-none absolute inset-0 -z-10 flex items-start justify-center
+            text-center heading-page font-normal
+            text-black dark:text-white
+            mb-6 md:mb-8
+            relative z-10
+            mt-2 sm:mt-6 md:mt-10
           "
         >
-          <div
-            className="
-               world-dots
-              h-[clamp(190px,38vw,360px)]
-              w-[clamp(300px,60vw,840px)]
-              opacity-80 dark:opacity-60
-              bg-neutral-400/60 dark:bg-neutral-500/50
-              transition-opacity
-            "
-          />
-        </div>
-
-        {/* Heading (akan sejajar top map karena map pakai items-start + mask-position:top) */}
-        <h2 className="text-center heading-page font-normal text-black dark:text-white -mt-12 mb-10">
           Get Early Access
         </h2>
 
-        {/* Stats */}
-        <div className="mt-6 md:mt-8 grid grid-cols-2 md:grid-cols-4 gap-x-8 gap-y-6 md:gap-y-8 text-center my-7">
-          {STATS.map((s, i) => (
-            <Stat key={i} {...s} start={start} />
-          ))}
+        {/* Wrapper peta + stats */}
+        <div className="relative flex flex-col items-center">
+          {/* MAP hanya membelakangi blok stats */}
+          <div
+            aria-hidden
+            className="
+              pointer-events-none absolute inset-x-0 top-0 -z-10 mx-auto
+              world-dots
+              h-[520px] sm:h-[720px] md:h-[420px] lg:h-[420px]
+              w-[min(95vw,1080px)]
+              opacity-80 dark:opacity-60
+              bg-neutral-400/60 dark:bg-neutral-500/50
+              transition-transform
+              -translate-y-4 sm:-translate-y-6 md:-translate-y-20 
+            "
+          />
+          {/* Stats: 1 → 2 → 4 kolom */}
+          <div
+            className="
+              mt-2 md:mt-15
+              grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4
+              gap-y-6 sm:gap-y-8 md:gap-y-8 gap-x-8
+              text-center
+            "
+          >
+            {STATS.map((s, i) => (
+              <Stat key={i} {...s} start={start} />
+            ))}
+          </div>
         </div>
 
         {/* Subcopy */}
-        <p className="mt-6 md:mt-8 text-center text-[14px] md:text-[16px] text-foreground/80">
+        <p className="mt-2 md:mt-15 mb-5 md:mb-7 text-center text-[14px] md:text-[16px] text-foreground/80">
           Ready to get started with Velogo?
         </p>
 
-        {/* CTAs (TIDAK DIUBAH) */}
+        {/* CTAs (tetap sesuai permintaanmu) */}
         <div className="mt-3 md:mt-4 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
           <Link
             href="#waitlist"
@@ -98,7 +98,7 @@ export default function EarlyAccess() {
               inline-flex items-center justify-center
               h-12 px-6 rounded-lg bg-primary text-primary-foreground
               shadow-md hover:brightness-110 transition
-              min-w-[240px]
+              min-w-[240px] w-[321px]
             "
           >
             Join the Waiting List
@@ -111,12 +111,14 @@ export default function EarlyAccess() {
             className="
               inline-flex items-center justify-center gap-2
               h-12 px-6 rounded-lg
-              border border-[#25D366] text-[#25D366] bg-white dark:bg-white
-              hover:bg-[#E9F9EF] dark:hover:bg-[#1f3527] transition shadow-sm
+              border border-[#25D366] text-[#25D366]
+              bg-white dark:bg-white
+              hover:bg-[#E9F9EF] dark:hover:bg-[#1f3527]
+              transition shadow-sm
               min-w-[240px]
             "
           >
-            <WhatsAppIcon className="h-5 w-5" />
+            <WhatsAppIcon />
             Connect WhatsApp
           </a>
         </div>
@@ -125,36 +127,27 @@ export default function EarlyAccess() {
   )
 }
 
-/** Komponen Stat dengan animasi count-up */
-function Stat({
-  label,
-  value,
-  suffix = "",
-  start,
-}: StatItem & { start: boolean }) {
+function Stat({ label, value, suffix = "", start }: StatItem & { start: boolean }) {
   const [n, setN] = useState(0)
-  const target = value
-  const duration = 1200 // ms
-
+  const duration = 1200
   useEffect(() => {
     if (!start) return
     let raf = 0
     const t0 = performance.now()
     const step = (t: number) => {
       const p = Math.min(1, (t - t0) / duration)
-      const eased = easeOutCubic(p)
-      setN(Math.round(target * eased))
+      setN(Math.round(value * easeOutCubic(p)))
       if (p < 1) raf = requestAnimationFrame(step)
     }
     raf = requestAnimationFrame(step)
     return () => cancelAnimationFrame(raf)
-  }, [start, target])
+  }, [start, value])
 
   const display = useMemo(() => `${n.toLocaleString()}${suffix}`, [n, suffix])
 
   return (
     <div className="flex flex-col items-center">
-      <div className="text-[28px] md:text-[40px] font-bold text-black dark:text-white leading-none">
+      <div className="text-[28px] md:text-[40px] font-bold leading-none text-black dark:text-white">
         {display}
       </div>
       <div className="mt-2 text-[14px] md:text-[16px] text-foreground/70">
@@ -164,12 +157,14 @@ function Stat({
   )
 }
 
-/** Inline WhatsApp icon (tanpa lib brand) */
-function WhatsAppIcon({ className = "" }: { className?: string }) {
+function WhatsAppIcon() {
   return (
-    <svg className={className} viewBox="0 0 32 32" fill="currentColor" aria-hidden="true">
-      <path d="M16.004 3C9.937 3 5 7.938 5 14.005c0 2.39.72 4.613 1.955 6.46L6 29l8.71-0.92a10.89 10.89 0 0 0 1.294.078C22.062 28.158 27 23.22 27 17.153 27 11.085 22.07 6.147 16.004 6.147zM9.24 24.62l.42-2.468a1.12 1.12 0 0 0-.16-.81 9.13 9.13 0 0 1-1.52-5.33c0-5.053 4.11-9.163 9.164-9.163 5.053 0 9.163 4.11 9.163 9.163 0 5.054-4.11 9.164-9.163 9.164a9.1 9.1 0 0 1-4.58-1.245 1.12 1.12 0 0 0-.81-.11l-2.514.8z" />
-      <path d="M21.78 19.53c-.27.13-1.59.78-1.83.86-.24.09-.42.13-.61-.13-.18-.27-.7-.86-.86-1.04-.16-.18-.32-.2-.59-.07-.27.13-1.15.43-2.19 1.38-.8.71-1.34 1.58-1.5 1.85-.16.27-.03.42.1.55.1.1.27.27.4.43.13.16.18.27.27.45.09.18.04.34-.02.47-.07.13-.61 1.47-.84 1.99-.22.53-.44.46-.61.46-.16 0-.35.02-.54.02s-.5-.07-.76-.35c-.27-.27-1-1-1-2.44 0-1.44 1.02-2.84 1.17-3.03.16-.18 2.25-3.43 5.45-4.81 3.2-1.38 3.2-.93 3.77-.87.58.05 1.88.77 2.16 1.52.27.76.27 1.41.18 1.54-.09.13-.24.2-.5.33z" />
-    </svg>
+    <Image
+      src="/icons/whatsapp-button.svg"
+      alt="WhatsApp"
+      width={20}
+      height={20}
+    />
   )
 }
+

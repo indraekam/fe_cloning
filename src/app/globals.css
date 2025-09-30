@@ -8,7 +8,7 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 /* ========== BASE TOKENS (BERUBAH SAAT DARK) ========== */
-/* Gunakan token ini untuk kompatibilitas dengan kode lama & mapping ke Tailwind v4 */
+/* Token dasar + nilai default komponen (compatible Tailwind v4 mapping) */
 :root {
   /* layout */
   --radius: 12px;
@@ -18,8 +18,7 @@
   --foreground: hsl(222 84% 5%);
 
   /* brand — tetap sama di dark */
-  --primary: hsl(210 92% 38%);
-  /* #0861BB */
+  --primary: hsl(210 92% 38%);          /* #0861BB */
   --primary-foreground: hsl(0 0% 100%);
 
   /* surfaces */
@@ -44,20 +43,36 @@
   --border: hsl(214 32% 91%);
   --input: hsl(214 32% 91%);
   --ring: hsl(210 92% 38%);
+
+  /* ===== Velogo Glass defaults (reusable) ===== */
+  --glass-angle: 195deg;
+  --glass-blur: 84px;               /* gunakan 42px kalau mau lebih ringan */
+  --glass-cyan-r: 43;
+  --glass-cyan-g: 255;
+  --glass-cyan-b: 255;
+  --glass-c1: 0.10;                 /* stop 1 */
+  --glass-c2: 0.02;                 /* stop 2 */
+  --glass-c3: 0.06;                 /* stop 3 */
+  --light-card: #E0EFFF;            /* warna card di light mode */
+  --light-border: #B5D4F6;          /* border light */
+  --dark-border: #2F2F2F;           /* border dark */
 }
 
 /* DARK overrides – cukup ubah BASE TOKENS di atas */
 :root.dark,
 .dark {
-  --background: hsl(222 84% 5%);
-  --foreground: hsl(210 40% 98%);
+  /* PURE BLACK page background (biar glass baca hitam, bukan biru) */
+  --background: 0 0% 0%;
+  --foreground: 0 0% 100%;
 
   /* brand biru tetap sama di dark */
   --primary: hsl(210 92% 38%);
   --primary-foreground: hsl(0 0% 100%);
 
-  --card: hsl(222 84% 6%);
-  --card-foreground: hsl(210 40% 98%);
+  /* surfaces */
+  /* gunakan card hitam supaya panel kaca konsisten */
+  --card: 0 0% 0%;
+  --card-foreground: 0 0% 100%;
   --popover: hsl(222 84% 6%);
   --popover-foreground: hsl(210 40% 98%);
 
@@ -112,38 +127,30 @@
 
 /* Base reset agar seluruh halaman pakai token */
 @layer base {
-  * {
-    @apply border-border;
-  }
+  * { @apply border-border; }
 
-  html {
-    scroll-behavior: smooth;
-  }
+  html { scroll-behavior: smooth; }
 
-  body {
-    @apply bg-background text-foreground;
-  }
+  body { @apply bg-background text-foreground; }
 
   .heading-page {
     @apply font-bold leading-tight text-black text-[24px] md:text-[40px] lg:text-[48px];
   }
 
-  /* Standar Subjudul Page */
   .subheading-page {
     @apply font-medium text-black text-[16px] md:text-[18px] lg:text-[20px];
   }
 }
 
-/* ========= UTILITAS GLOBAL TAMBAHAN (AMAN) ========= */
+/* ========= UTILITAS GLOBAL ========= */
 
-/* 1) Glass layer reusable (dipakai navbar, chip, panel search, dll) */
+/* 1) Glass layer umum (ringan) */
 @utility glass {
   background-color: hsl(var(--color-background) / 0.40);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border: 1px solid hsl(0 0% 100% / 0.15);
 }
-
 .dark .glass {
   background-color: hsl(0 0% 0% / 0.30);
   border-color: hsl(0 0% 100% / 0.12);
@@ -154,82 +161,29 @@
   max-width: 1200px;
   width: 100%;
   margin-inline: auto;
-  padding-inline: 1rem;
-  /* 16px */
+  padding-inline: 1rem; /* 16px */
 }
+@media (min-width: 850px) { .app-container { padding-inline: 1.5rem; } }  /* 24px */
+@media (min-width: 1200px) { .app-container { padding-inline: 2rem; } }   /* 32px */
 
-@media (min-width: 850px) {
-  .app-container {
-    padding-inline: 1.5rem;
-  }
+/* 3) Section spacing + scroll offset */
+:root { --header-h: 104px; }
+@media (min-width: 1024px) { :root { --header-h: 104px; } }
+@utility section-pad { padding-block: 4rem; }                 /* 64px */
+@media (min-width: 850px) { .section-pad { padding-block: 6rem; } } /* 96px */
+@utility section-anchor { scroll-margin-top: var(--header-h); }
 
-  /* 24px */
-}
-
-@media (min-width: 1200px) {
-  .app-container {
-    padding-inline: 2rem;
-  }
-
-  /* 32px */
-}
-
-/* 3) Section spacing + scroll offset agar tidak ketutup header */
-:root {
-  --header-h: 104px;
-}
-
-/* sesuaikan tinggi header final */
-@media (min-width: 1024px) {
-  :root {
-    --header-h: 104px;
-  }
-}
-
-@utility section-pad {
-  padding-block: 4rem;
-  /* 64px default section spacing */
-}
-
-@media (min-width: 850px) {
-  .section-pad {
-    padding-block: 6rem;
-  }
-
-  /* 96px tablet/desktop */
-}
-
-@utility section-anchor {
-  scroll-margin-top: var(--header-h);
-}
-
-/* 4) Brand helper kalau butuh warna biru konsisten via util */
-@utility text-brand {
-  color: hsl(var(--primary));
-}
-
-@utility bg-brand {
-  background-color: hsl(var(--primary));
-}
-
-@utility ring-brand {
-  --tw-ring-color: hsl(var(--ring));
-}
+/* 4) Brand helpers */
+@utility text-brand { color: hsl(var(--primary)); }
+@utility bg-brand   { background-color: hsl(var(--primary)); }
+@utility ring-brand { --tw-ring-color: hsl(var(--ring)); }
 
 /* 5) Radius helper mengikuti token */
-@utility rounded-lg-token {
-  border-radius: var(--radius);
-}
+@utility rounded-lg-token { border-radius: var(--radius); }
+@utility rounded-md-token { border-radius: var(--radius-md); }
+@utility rounded-sm-token { border-radius: var(--radius-sm); }
 
-@utility rounded-md-token {
-  border-radius: var(--radius-md);
-}
-
-@utility rounded-sm-token {
-  border-radius: var(--radius-sm);
-}
-
-/* tailwind globals */
+/* 6) Mask util world-dots */
 @layer utilities {
   .world-dots {
     mask-image: url(/images/world-dots.svg);
@@ -242,3 +196,93 @@
     -webkit-mask-size: contain;
   }
 }
+
+/* ====== VELOGO — GLASS CARD UTILITIES (REUSABLE) ====== */
+
+/* Section hitam murni (agar tint glass tidak kebiruan) */
+@utility section-black { background-color: #000; }
+
+/* Card dasar: Light solid #E0EFFF, Dark glass linear-gradient RGB + blur
+   → pakai kalau kamu memang ingin light = biru muda */
+@utility glass-card {
+  background-color: var(--light-card); /* light */
+  border-radius: 32px;
+}
+.dark .glass-card {
+  background-color: transparent;
+  background-image: linear-gradient(
+    var(--glass-angle),
+    rgba(var(--glass-cyan-r), var(--glass-cyan-g), var(--glass-cyan-b), var(--glass-c1)) 0%,
+    rgba(var(--glass-cyan-r), var(--glass-cyan-g), var(--glass-cyan-b), var(--glass-c2)) 50%,
+    rgba(var(--glass-cyan-r), var(--glass-cyan-g), var(--glass-cyan-b), var(--glass-c3)) 100%
+  );
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  backdrop-filter: blur(var(--glass-blur));
+}
+
+/* HANYA dark glass (light tidak berubah) → dipakai untuk panel yang
+   light-nya mau tetap putih/abu-abu (contoh: Main Feature) */
+@utility glass-dark {
+  background-color: transparent;
+  background-image: linear-gradient(
+    var(--glass-angle),
+    rgba(var(--glass-cyan-r), var(--glass-cyan-g), var(--glass-cyan-b), var(--glass-c1)) 0%,
+    rgba(var(--glass-cyan-r), var(--glass-cyan-g), var(--glass-cyan-b), var(--glass-c2)) 50%,
+    rgba(var(--glass-cyan-r), var(--glass-cyan-g), var(--glass-cyan-b), var(--glass-c3)) 100%
+  );
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  backdrop-filter: blur(var(--glass-blur));
+}
+
+/* Border solid (light/dark) */
+@utility glass-border-solid {
+  border: 1px solid var(--light-border);
+  border-radius: 32px;
+}
+.dark .glass-border-solid { border-color: var(--dark-border); }
+
+/* Alternatif border gradient 1px (pakai wrapper p-[1px]) */
+@utility glass-border-gradient {
+  background-image: linear-gradient(135deg, #EDEDED, #2F2F2F);
+  border-radius: 32px;
+}
+
+/* Ukuran Figma (opsional) */
+@utility card-figma {
+  width: 100%;
+  max-width: 1240px;
+  min-height: 471px; /* ganti ke height:471px jika tidak mau hug */
+  border-radius: 32px;
+}
+
+/* Area teks 505x208 (hug height) */
+@utility card-text-area {
+  flex: 0 0 505px;
+  min-height: 208px;
+}
+
+/* Tipografi Geist (judul & deskripsi) */
+@utility title-geist {
+  font-family: var(--font-geist-sans, inherit);
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 1.2;
+}
+@media (min-width: 1024px) { /* laptop+ */
+  .title-geist { font-size: 32px; line-height: 1.15; }
+}
+@utility desc-geist {
+  font-family: var(--font-geist-sans, inherit);
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  font-size: 16px; /* hp */
+}
+@media (min-width: 768px) {   /* tablet */
+  .desc-geist { font-size: 14px; }
+}
+@media (min-width: 1024px) {  /* laptop+ */
+  .desc-geist { font-size: 18px; }
+}
+
+/* Varian blur ringan (override saat perlu) */
+@utility glass-blur-42 { --glass-blur: 42px; }
