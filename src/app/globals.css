@@ -18,7 +18,8 @@
   --foreground: hsl(222 84% 5%);
 
   /* brand — tetap sama di dark */
-  --primary: hsl(210 92% 38%);          /* #0861BB */
+  --primary: hsl(210 92% 38%);
+  /* #0861BB */
   --primary-foreground: hsl(0 0% 100%);
 
   /* surfaces */
@@ -46,16 +47,28 @@
 
   /* ===== Velogo Glass defaults (reusable) ===== */
   --glass-angle: 195deg;
-  --glass-blur: 84px;               /* gunakan 42px kalau mau lebih ringan */
+  --glass-blur: 84px;
+  /* gunakan 42px kalau mau lebih ringan */
   --glass-cyan-r: 43;
   --glass-cyan-g: 255;
   --glass-cyan-b: 255;
-  --glass-c1: 0.10;                 /* stop 1 */
-  --glass-c2: 0.02;                 /* stop 2 */
-  --glass-c3: 0.06;                 /* stop 3 */
-  --light-card: #E0EFFF;            /* warna card di light mode */
-  --light-border: #B5D4F6;          /* border light */
-  --dark-border: #2F2F2F;           /* border dark */
+  --glass-c1: 0.10;
+  /* stop 1 */
+  --glass-c2: 0.02;
+  /* stop 2 */
+  --glass-c3: 0.06;
+  /* stop 3 */
+  --light-card: #E0EFFF;
+  /* warna card di light mode */
+  --light-border: #B5D4F6;
+  /* border light */
+  --dark-border: #2F2F2F;
+  /* border dark */
+
+  --radial-start: #2B78C5;
+  /* light */
+  --radial-end: #0861BB;
+  /* light */
 }
 
 /* DARK overrides – cukup ubah BASE TOKENS di atas */
@@ -89,6 +102,8 @@
   --border: hsl(217 33% 18%);
   --input: hsl(217 33% 18%);
   --ring: hsl(210 92% 38%);
+  --radial-start: 0 0% 0%;
+  --radial-end: 0 0% 0%;
 }
 
 /* ========== TAILWIND V4 COLOR TOKENS (MAPPING) ========== */
@@ -123,15 +138,23 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
+
+
 }
 
 /* Base reset agar seluruh halaman pakai token */
 @layer base {
-  * { @apply border-border; }
+  * {
+    @apply border-border;
+  }
 
-  html { scroll-behavior: smooth; }
+  html {
+    scroll-behavior: smooth;
+  }
 
-  body { @apply bg-background text-foreground; }
+  body {
+    @apply bg-background text-foreground;
+  }
 
   .heading-page {
     @apply font-bold leading-tight text-black text-[24px] md:text-[40px] lg:text-[48px];
@@ -151,6 +174,7 @@
   -webkit-backdrop-filter: blur(10px);
   border: 1px solid hsl(0 0% 100% / 0.15);
 }
+
 .dark .glass {
   background-color: hsl(0 0% 0% / 0.30);
   border-color: hsl(0 0% 100% / 0.12);
@@ -161,27 +185,77 @@
   max-width: 1200px;
   width: 100%;
   margin-inline: auto;
-  padding-inline: 1rem; /* 16px */
+  padding-inline: 1rem;
+  /* 16px */
 }
-@media (min-width: 850px) { .app-container { padding-inline: 1.5rem; } }  /* 24px */
-@media (min-width: 1200px) { .app-container { padding-inline: 2rem; } }   /* 32px */
+
+@media (min-width: 850px) {
+  .app-container {
+    padding-inline: 1.5rem;
+  }
+}
+
+/* 24px */
+@media (min-width: 1200px) {
+  .app-container {
+    padding-inline: 2rem;
+  }
+}
+
+/* 32px */
 
 /* 3) Section spacing + scroll offset */
-:root { --header-h: 104px; }
-@media (min-width: 1024px) { :root { --header-h: 104px; } }
-@utility section-pad { padding-block: 4rem; }                 /* 64px */
-@media (min-width: 850px) { .section-pad { padding-block: 6rem; } } /* 96px */
-@utility section-anchor { scroll-margin-top: var(--header-h); }
+:root {
+  --header-h: 104px;
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --header-h: 104px;
+  }
+}
+
+@utility section-pad {
+  padding-block: 4rem;
+}
+
+/* 64px */
+@media (min-width: 850px) {
+  .section-pad {
+    padding-block: 6rem;
+  }
+}
+
+/* 96px */
+@utility section-anchor {
+  scroll-margin-top: var(--header-h);
+}
 
 /* 4) Brand helpers */
-@utility text-brand { color: hsl(var(--primary)); }
-@utility bg-brand   { background-color: hsl(var(--primary)); }
-@utility ring-brand { --tw-ring-color: hsl(var(--ring)); }
+@utility text-brand {
+  color: hsl(var(--primary));
+}
+
+@utility bg-brand {
+  background-color: hsl(var(--primary));
+}
+
+@utility ring-brand {
+  --tw-ring-color: hsl(var(--ring));
+}
 
 /* 5) Radius helper mengikuti token */
-@utility rounded-lg-token { border-radius: var(--radius); }
-@utility rounded-md-token { border-radius: var(--radius-md); }
-@utility rounded-sm-token { border-radius: var(--radius-sm); }
+@utility rounded-lg-token {
+  border-radius: var(--radius);
+}
+
+@utility rounded-md-token {
+  border-radius: var(--radius-md);
+}
+
+@utility rounded-sm-token {
+  border-radius: var(--radius-sm);
+}
 
 /* 6) Mask util world-dots */
 @layer utilities {
@@ -199,23 +273,22 @@
 
 /* ====== VELOGO — GLASS CARD UTILITIES (REUSABLE) ====== */
 
-/* Section hitam murni (agar tint glass tidak kebiruan) */
-@utility section-black { background-color: #000; }
+
 
 /* Card dasar: Light solid #E0EFFF, Dark glass linear-gradient RGB + blur
    → pakai kalau kamu memang ingin light = biru muda */
 @utility glass-card {
-  background-color: var(--light-card); /* light */
+  background-color: var(--light-card);
+  /* light */
   border-radius: 32px;
 }
+
 .dark .glass-card {
   background-color: transparent;
-  background-image: linear-gradient(
-    var(--glass-angle),
-    rgba(var(--glass-cyan-r), var(--glass-cyan-g), var(--glass-cyan-b), var(--glass-c1)) 0%,
-    rgba(var(--glass-cyan-r), var(--glass-cyan-g), var(--glass-cyan-b), var(--glass-c2)) 50%,
-    rgba(var(--glass-cyan-r), var(--glass-cyan-g), var(--glass-cyan-b), var(--glass-c3)) 100%
-  );
+  background-image: linear-gradient(var(--glass-angle),
+      rgba(var(--glass-cyan-r), var(--glass-cyan-g), var(--glass-cyan-b), var(--glass-c1)) 0%,
+      rgba(var(--glass-cyan-r), var(--glass-cyan-g), var(--glass-cyan-b), var(--glass-c2)) 50%,
+      rgba(var(--glass-cyan-r), var(--glass-cyan-g), var(--glass-cyan-b), var(--glass-c3)) 100%);
   -webkit-backdrop-filter: blur(var(--glass-blur));
   backdrop-filter: blur(var(--glass-blur));
 }
@@ -224,12 +297,10 @@
    light-nya mau tetap putih/abu-abu (contoh: Main Feature) */
 @utility glass-dark {
   background-color: transparent;
-  background-image: linear-gradient(
-    var(--glass-angle),
-    rgba(var(--glass-cyan-r), var(--glass-cyan-g), var(--glass-cyan-b), var(--glass-c1)) 0%,
-    rgba(var(--glass-cyan-r), var(--glass-cyan-g), var(--glass-cyan-b), var(--glass-c2)) 50%,
-    rgba(var(--glass-cyan-r), var(--glass-cyan-g), var(--glass-cyan-b), var(--glass-c3)) 100%
-  );
+  background-image: linear-gradient(var(--glass-angle),
+      rgba(var(--glass-cyan-r), var(--glass-cyan-g), var(--glass-cyan-b), var(--glass-c1)) 0%,
+      rgba(var(--glass-cyan-r), var(--glass-cyan-g), var(--glass-cyan-b), var(--glass-c2)) 50%,
+      rgba(var(--glass-cyan-r), var(--glass-cyan-g), var(--glass-cyan-b), var(--glass-c3)) 100%);
   -webkit-backdrop-filter: blur(var(--glass-blur));
   backdrop-filter: blur(var(--glass-blur));
 }
@@ -239,7 +310,10 @@
   border: 1px solid var(--light-border);
   border-radius: 32px;
 }
-.dark .glass-border-solid { border-color: var(--dark-border); }
+
+.dark .glass-border-solid {
+  border-color: var(--dark-border);
+}
 
 /* Alternatif border gradient 1px (pakai wrapper p-[1px]) */
 @utility glass-border-gradient {
@@ -251,7 +325,8 @@
 @utility card-figma {
   width: 100%;
   max-width: 1240px;
-  min-height: 471px; /* ganti ke height:471px jika tidak mau hug */
+  min-height: 471px;
+  /* ganti ke height:471px jika tidak mau hug */
   border-radius: 32px;
 }
 
@@ -268,21 +343,129 @@
   font-size: 24px;
   line-height: 1.2;
 }
-@media (min-width: 1024px) { /* laptop+ */
-  .title-geist { font-size: 32px; line-height: 1.15; }
+
+@media (min-width: 1024px) {
+
+  /* laptop+ */
+  .title-geist {
+    font-size: 32px;
+    line-height: 1.15;
+  }
 }
+
 @utility desc-geist {
   font-family: var(--font-geist-sans, inherit);
   font-weight: 400;
   letter-spacing: 0.01em;
-  font-size: 16px; /* hp */
+  font-size: 16px;
+  /* hp */
 }
-@media (min-width: 768px) {   /* tablet */
-  .desc-geist { font-size: 14px; }
+
+@media (min-width: 768px) {
+
+  /* tablet */
+  .desc-geist {
+    font-size: 14px;
+  }
 }
-@media (min-width: 1024px) {  /* laptop+ */
-  .desc-geist { font-size: 18px; }
+
+@media (min-width: 1024px) {
+
+  /* laptop+ */
+  .desc-geist {
+    font-size: 18px;
+  }
 }
 
 /* Varian blur ringan (override saat perlu) */
-@utility glass-blur-42 { --glass-blur: 42px; }
+@utility glass-blur-42 {
+  --glass-blur: 42px;
+}
+
+/* === VELOGO: Corner Watermark (LIGHT ONLY) === */
+@layer utilities {
+  :root {
+    --wm-mask-url: url(/images/why-choose/logo-background.svg);
+  }
+
+  .wm-velogo {
+    --wm-color: #ffffff;
+    /* --wm-opacity: 0.15;   
+    --wm-blur: 0.5px; */
+
+    background-color: var(--wm-color);
+    opacity: var(--wm-opacity);
+    filter: blur(var(--wm-blur));
+
+    -webkit-mask-image: var(--wm-mask-url);
+    mask-image: var(--wm-mask-url);
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    -webkit-mask-position: center;
+    mask-position: center;
+  }
+
+  /* hide di dark mode */
+  .dark .wm-velogo {
+    display: none;
+  }
+}
+
+/* === Section Blue Radial === */
+@utility section-blue-radial {
+  background-image: radial-gradient(120% 100% at 50% 0%,
+      var(--radial-start) 0%,
+      var(--radial-end) 100%);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+
+/* global.css */
+
+@utility wc-card {
+  box-sizing: border-box;
+  width: 100%;
+  border-radius: 16px;
+  padding: 32px;
+  background-color: rgba(255, 255, 255, 0.8);
+  -webkit-backdrop-filter: blur(100px);
+  backdrop-filter: blur(100px);
+  border: 1px solid hsl(var(--color-border));
+}
+
+.dark .wc-card {
+  background-color: rgba(0, 0, 0, 0.30);
+}
+
+
+
+/* === BATCH 2: generic button utilities (non-breaking) === */
+@utility btn {
+  @apply inline-flex items-center justify-center gap-2 font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[--primary] transition;
+}
+
+@utility btn-primary {
+  @apply btn bg-primary text-primary-foreground hover:opacity-90;
+}
+
+@utility btn-outline {
+  @apply btn border border-[--color-border] bg-background hover:bg-accent;
+}
+
+/* Special outline for WhatsApp CTA (kept exact colors used in your design) */
+@utility btn-wa-outline {
+  @apply btn border text-[#25D366] border-[#25D366] bg-white dark:bg-white hover:bg-[#E9F9EF] dark:hover:bg-[#1f3527];
+}
+
+
+/* === BATCH 3: section/container helpers (optional, non-breaking) === */
+@utility section-wrap {
+  @apply scroll-mt-24 py-16 md:py-24;
+}
+
+@utility container-max {
+  @apply mx-auto w-full max-w-[1200px] px-4 md:px-6 lg:px-8;
+}

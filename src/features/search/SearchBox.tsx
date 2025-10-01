@@ -64,7 +64,7 @@ export default function SearchBox() {
           >
             <TabsList
               className="
-        bg-white dark:bg-black text-foreground w-full md:w-[262px] h-[60px] md:h-[69px] rounded-2xl p-2 flex items-center justify-between gap-2 shadow-sm"
+        bg-popover text-foreground w-full md:w-[262px] h-[60px] md:h-[69px] rounded-2xl p-2 flex items-center justify-between gap-2 shadow-sm"
             >
               <TabsTrigger
                 value="ask"

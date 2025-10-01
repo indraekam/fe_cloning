@@ -18,11 +18,11 @@ export default function ModeToggle() {
       className="
         h-14 w-14 p-0                      /* 56×56px */
         rounded-md border
-        glass
+        glass bg-transparent
       "
     >
-      <Sun className="h-5 w-5 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-      <Moon className="absolute h-5 w-5 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+      <Sun className="!h-[32px] !w-[32px] rotate-0 scale-0 transition-all dark:rotate-0 dark:scale-100 " />
+      <Moon className="absolute !h-[32px] !w-[32px]  scale-100 transition-all dark:-rotate-90 dark:scale-0" />
     </Button>
   )
 }
