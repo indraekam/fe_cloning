@@ -3,11 +3,6 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 
-/**
- * Pastikan font Geist sudah terpasang (global):
- * html { font-family: var(--font-geist-sans), system-ui, ... }
- * atau gunakan className "font-geist" bila sudah ada di projectmu.
- */
 
 type Feature = {
   title: string;
@@ -56,7 +51,7 @@ export default function FeatureCard() {
 
       <div className="container mx-auto px-4 space-y-10 lg:space-y-12">
         {FEATURES.map((f, i) => {
-          const textFirst = i % 2 === 0; // 0,2 => text kiri; 1,3 => text kanan
+          const textFirst = i % 2 === 0; 
           return (
             <motion.div
               key={f.title}
@@ -64,12 +59,9 @@ export default function FeatureCard() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-80px" }}
               transition={{ duration: 0.45, delay: i * 0.05 }}
-              className="mx-auto w-full xl:w-[1240px]" // fallback untuk xl:w-310 bila tidak ada di config
+              className="mx-auto w-full xl:w-[1240px]" 
             >
-              {/* Card wrapper:
-                 - Light: solid #E0EFFF + light border
-                 - Dark: glass linear-gradient (RGB) + backdrop-blur + dark border
-                 - Zig-zag: md:flex-row atau md:flex-row-reverse */}
+
               <div
                 className={[
                   "flex flex-col gap-10 py-5 px-4 md:p-10 h-auto w-full rounded-4xl",
@@ -80,7 +72,7 @@ export default function FeatureCard() {
                   textFirst ? "md:flex-row-reverse" : "md:flex-row",
                 ].join(" ")}
               >
-                {/* IMAGE — mobile duluan (di atas) */}
+                {/* IMAGE */}
                 <div className="flex-1 flex items-center justify-center">
                   <Image
                     src={f.img}
@@ -88,11 +80,11 @@ export default function FeatureCard() {
                     width={640}
                     height={420}
                     priority={i < 2}
-                    className="rounded-2xl select-none" // tanpa border & shadow (sesuai request)
+                    className="rounded-2xl select-none" 
                   />
                 </div>
 
-                {/* TEXT AREA 505 × 208 (hug height) */}
+                {/* TEXT AREA */}
                 <div className="md:basis-[505px] md:min-h-[208px] md:shrink-0 flex items-center">
                   <div className="text-center md:text-left">
                     <h3

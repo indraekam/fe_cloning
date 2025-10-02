@@ -34,7 +34,7 @@ export default function Faq({
 
   return (
     <section id="faq" className={`section-wrap section-anchor ${className}`}>
-      <div className="container-max">
+      <div className="mx-auto w-full max-w-[1200px] px-4 md:px-6 lg:px-8">
         <div className="text-center mb-8 md:mb-10">
           <span className="block mb-2 text-[14px] md:text-[16px] text-muted-foreground">FAQ</span>
           <h2 className="heading-page text-foreground">Frequently Asked Question</h2>
@@ -53,14 +53,13 @@ export default function Faq({
                   "data-[state=open]:border-primary/30",
                 ].join(" ")}
               >
-                {/* Trigger: pakai chevron default shadcn (hanya 1), dibesarin & diwarnai */}
+                {/* Trigger */}
                 <AccordionTrigger
                   className={[
                     "group w-full px-5 md:px-6 py-4 md:py-5",
                     "flex items-center justify-between gap-4 text-left",
                     "font-medium transition-colors",
                     "data-[state=open]:text-primary data-[state=open]:font-semibold",
-                    // style chevron bawaan (last child svg)
                     "[&>svg]:size-5 md:[&>svg]:size-6",
                     "text-muted-foreground group-data-[state=open]:text-primary",
                   ].join(" ")}
@@ -68,10 +67,10 @@ export default function Faq({
                   <div className="flex-1">{it.q}</div>
                 </AccordionTrigger>
 
-                {/* Content: separator + teks biru non-bold */}
+                {/* Content */}
                 <AccordionContent
                   className={[
-                    "px-0 pb-5 md:pb-6 pt-0", // separator akan mengatur padding sendiri
+                    "px-0 pb-5 md:pb-6 pt-0", 
                     "text-[14px] md:text-[16px] leading-relaxed",
                   ].join(" ")}
                 >

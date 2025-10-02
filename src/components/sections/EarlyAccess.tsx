@@ -41,7 +41,7 @@ export default function EarlyAccess() {
       className="relative overflow-visible min-h-[400px] mt-16 md:mt-24 mb-8 md:mb-16"
     >
       <div className="app-container relative max-w-7xl mx-auto px-4 py-1 md:py-2 min-h-[400px] lg:py-4 min-h-[400px]flex flex-col justify-start">
-        {/* Heading: diberi jarak aman dari peta di tablet/desktop */}
+        {/* Heading */}
         <h2
           className="
             text-center heading-page font-normal
@@ -54,9 +54,9 @@ export default function EarlyAccess() {
           Get Early Access
         </h2>
 
-        {/* Wrapper peta + stats */}
+        {/* Wrapper */}
         <div className="relative flex flex-col items-center">
-          {/* MAP hanya membelakangi blok stats */}
+          {/* MAP  */}
           <div
             aria-hidden
             className="
@@ -70,7 +70,6 @@ export default function EarlyAccess() {
               -translate-y-4 sm:-translate-y-6 md:-translate-y-20 
             "
           />
-          {/* Stats: 1 → 2 → 4 kolom */}
           <div
             className="
               mt-2 md:mt-15
@@ -86,42 +85,56 @@ export default function EarlyAccess() {
         </div>
 
         {/* Subcopy */}
-        <p className="mt-2 md:mt-15 mb-5 md:mb-7 text-center text-[14px] md:text-[16px] text-foreground/80">
+        <p className="mt-17 md:mt-15 mb-5 md:mb-7 text-center text-[14px] md:text-[16px] text-foreground/80">
           Ready to get started with Velogo?
         </p>
 
-        {/* CTAs (tetap sesuai permintaanmu) */}
+        {/* CTAs */}
         <div className="mt-3 md:mt-4 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
+          {/* JOIN */}
           <Link
             href="#waitlist"
-            className="
-              inline-flex items-center justify-center
-              h-12 px-6 rounded-lg bg-primary text-primary-foreground
-              shadow-md hover:brightness-110 transition
-              min-w-[240px] w-[321px]
-            "
+            className={[
+              "inline-flex items-center justify-center",
+              "h-[53px] md:h-[53px] lg:h-[56px]",
+              "w-[310px] md:w-[221px] lg:w-[321px]",
+              "gap-x-2",
+              "rounded-[16px] border bg-primary text-primary-foreground",
+              "shadow-md hover:brightness-110 transition",
+            ].join(" ")}
           >
             Join the Waiting List
           </Link>
 
+          {/* WHATSAPP */}
           <a
             href="https://wa.me/628XXXXXXXXXX"
             target="_blank"
             rel="noreferrer"
-            className="
-              inline-flex items-center justify-center gap-2
-              h-12 px-6 rounded-lg
-              border border-[#25D366] text-[#25D366]
-              bg-white dark:bg-white
-              hover:bg-[#E9F9EF] dark:hover:bg-[#1f3527]
-              transition shadow-sm
-              min-w-[240px]
-            "
+            className={[
+              "inline-flex items-center justify-center",
+              "h-[56px]",
+              "w-[310px] md:w-[244px] lg:w-[232px]",
+              "gap-x-2 lg:gap-x-[10px]",
+              "rounded-[16px] border border-[#25D366] text-[#25D366]",
+              "bg-white dark:bg-white hover:bg-[#E9F9EF] dark:hover:bg-[#1f3527]",
+              "transition shadow-sm",
+            ].join(" ")}
+            aria-label="Connect via WhatsApp"
           >
-            <WhatsAppIcon />
+            <span className="inline-block relative w-5 h-5">
+              <Image
+                src="/icons/whatsapp-button.svg"
+                alt="Whatsapp"
+                width={20}
+                height={20}
+              />
+            </span>
             Connect WhatsApp
           </a>
         </div>
+
+
       </div>
     </section>
   )

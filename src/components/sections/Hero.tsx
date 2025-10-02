@@ -1,4 +1,3 @@
-// Hero.tsx
 import Image from "next/image"
 import SearchBox from "@/features/search/SearchBox"
 
@@ -53,7 +52,7 @@ export default function Hero() {
           </span>
         </div>
 
-        {/* === HEADING + SUBTITLE (center, warna hitam) === */}
+        {/* === HEADING + SUBTITLE === */}
         <div className="mt-4 md:mt-6 text-center">
           <h1
             className="
@@ -85,8 +84,6 @@ export default function Hero() {
         <div className="mt-8 md:mt-10 w-full flex justify-center">
           <SearchBox />
         </div>
-
-        {/* (hapus) <div className="grow" /> */}
       </div>
     </section>
   )

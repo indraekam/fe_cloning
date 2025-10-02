@@ -20,14 +20,14 @@ export default function QuickSearchForm() {
       "
       onSubmit={(e) => {
         e.preventDefault()
-        // TODO: handle quick-search submit
+
       }}
     >
-      {/* Head copy: bold, hitam, 16px */}
+      {/* Head */}
       <div className="mb-4 text-[16px] font-bold text-black dark:text-white">
         Do you want to buy or rent?
       </div>
-      {/* Segmented control: edge-to-edge (2 kolom sama lebar) */}
+      {/* Segmented control */}
       <div className="mb-6 grid grid-cols-2 gap-2">
         <Button
           type="button"
@@ -59,7 +59,7 @@ export default function QuickSearchForm() {
 
 
 
-      {/* Property Type: full width */}
+      {/* Property Type*/}
       <div className="space-y-2 mb-4">
         <Label className="text-[16px] font-bold text-black dark:text-white">Property Type?</Label>
         <Select>
@@ -74,7 +74,7 @@ export default function QuickSearchForm() {
         </Select>
       </div>
 
-      {/* Location & Bedrooms: berdampingan, full width */}
+      {/* Location & Bedrooms */}
       <div className="grid grid-cols-2 gap-4 mb-4">
         <div className="space-y-2">
           <Label className="text-[16px] font-bold text-black dark:text-white">Location?</Label>
@@ -86,7 +86,7 @@ export default function QuickSearchForm() {
         </div>
       </div>
 
-      {/* Min / Max Price: berdampingan, full width */}
+      {/* Min / Max Price */}
       <div className="grid grid-cols-2 gap-4 mb-6">
         <div className="space-y-2">
           <Label className="text-[16px] font-bold text-black dark:text-white">Min Price?</Label>
@@ -98,7 +98,7 @@ export default function QuickSearchForm() {
         </div>
       </div>
 
-      {/* CTA: full width */}
+      {/* CTA */}
       <Button className="w-full h-12 rounded-full text-[14px] font-medium">
         Search
       </Button>

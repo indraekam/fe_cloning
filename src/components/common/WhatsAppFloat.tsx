@@ -8,10 +8,10 @@ export default function WhatsAppFloat() {
     <Link
       href="https://wa.me/628xxxxxxxxxx"
       target="_blank"
-      className="fixed bottom-6 right-6 z-50 inline-flex h-12 w-12 items-center justify-center rounded-full bg-[#25D366] shadow-lg"
+      className="fixed bottom-30 right-6 z-50 inline-flex h-17 w-17 items-center justify-center rounded-full"
       aria-label="Chat on WhatsApp"
     >
-      <Image src="/icons/whatsapp.svg" alt="WhatsApp" width={22} height={22} />
+      <Image src="/icons/whatsapp.svg" alt="WhatsApp" width={68} height={68} />
     </Link>
   )
 }

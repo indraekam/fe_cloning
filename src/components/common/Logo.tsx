@@ -9,7 +9,7 @@ export default function Logo({ className = "" }: { className?: string }) {
       aria-label="Velogo Home"
       className={cn("inline-flex items-center gap-2", className)}
     >
-      {/* 50×50px, theme-aware */}
+
       <Image
         src="/icons/logo-dark.svg"
         alt="Velogo"

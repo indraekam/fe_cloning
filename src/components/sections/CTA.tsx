@@ -9,7 +9,6 @@ export default function Cta() {
       id="cta"
       className="section-anchor section-pad relative overflow-hidden cta-surface-gray"
     >
-      {/* ellipse grid */}
       <div
         className="grid-ellipse-figma"
         style={{
@@ -24,7 +23,7 @@ export default function Cta() {
           Ready to Elevate Your Business with AI?
         </h2>
 
-        {/* === CARD: ukuran Figma per device (locked) === */}
+        {/* === CARD === */}
         <div className="mx-auto">
           <div
             className={[
@@ -61,12 +60,12 @@ export default function Cta() {
                 "flex flex-col items-center justify-center gap-8",
               ].join(" ")}
             >
-              {/* BUTTON: fix size + tipografi per device */}
+              {/* BUTTON */}
               <Button
                 className={[
                   "btn-primary border border-border",
                   "rounded-[16px]",
-                  "w-[153px] h-[56px]",        // HP (default)
+                  "w-[153px] h-[56px]",        // HP 
                   "md:w-[144px] md:h-[53px]",  // Tablet
                   "lg:w-[153px] lg:h-[56px]",  // Laptop+
                   "px-8 py-4",
@@ -85,7 +84,7 @@ export default function Cta() {
                 </span>
               </Button>
 
-              {/* SUBTEXT: fix size + letter-spacing per device */}
+              {/* SUBTEXT */}
               <p
                 className={[
                   "text-center text-muted-foreground",

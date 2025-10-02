@@ -1,4 +1,3 @@
-// app/(sections)/Testimonials.tsx
 "use client";
 
 import * as React from "react";
@@ -55,19 +54,16 @@ export default function Testimonials() {
 
   return (
     <section id="testimonials" className="container mx-auto py-16 md:py-20">
-      {/* WRAPPER: gradient bg + gradient border (persis Figma) */}
+      {/* WRAPPER */}
       <div
         className={[
           "max-w-[1280px] w-full min-h-[634px] mx-auto",
           "rounded-[32px] p-1 md:p-10 border border-transparent",
-          // LIGHT: isi + border pakai double-bg dengan angle dan stop sesuai Figma
           "[background:linear-gradient(226.86deg,#E6EFFF_-95.15%,#F9F9F9_57.72%)_padding-box,linear-gradient(135.88deg,#FFFFFF_-24.8%,#D6D6D6_55.55%)_border-box]",
           "backdrop-blur-[40px]",
           "shadow-[0_12px_40px_rgba(0,0,0,0.06)]",
-          // DARK (fallback kalau belum pakai util glass custom)
           "dark:bg-transparent dark:border-white/10 dark:backdrop-blur-md",
           "dark:bg-[rgba(255,255,255,0.06)]",
-          // jarak vertikal antar blok persis gap 80px
           "flex flex-col space-y-20",
         ].join(" ")}
       >
@@ -132,15 +128,9 @@ function TestimonialCard({
         // ukuran Figma + fallback mobile
         "snap-start shrink-0 h-[312px]",
         "w-[calc(100%-56px)] sm:w-[386px] basis-[calc(100%-56px)] sm:basis-[386px]",
-        // (calc(100%-56px)) = menyesuaikan layar kecil, 28px kiri/kanan kira2x]",
         "rounded-[16px] border border-transparent",
-        // 3 LAYER:
-        // 1) overlay gradient Figma (padding-box)
-        // 2) base putih solid (padding-box) → bikin tampak terang & tidak terpengaruh background
-        // 3) border gradient 1px (border-box)
         "[background:linear-gradient(195.05deg,rgba(255,255,255,.03)_0%,rgba(17,142,234,.02)_50%,rgba(255,255,255,.06)_100%)_padding-box,linear-gradient(#fff,#fff)_padding-box,linear-gradient(180deg,#E3E3E3_0%,#D7D7D7_100%)_border-box]",
         "shadow-[2px_4px_24px_8px_rgba(0,0,0,.04)]",
-        // samakan di dark, karena desain Figma card kecil ≠ glass
         "dark:[background:linear-gradient(195.05deg,rgba(255,255,255,.03)_0%,rgba(17,142,234,.02)_50%,rgba(255,255,255,.06)_100%)_padding-box,linear-gradient(#111,#111)_padding-box,linear-gradient(180deg,#3A3A3A_0%,#2D2D2D_100%)_border-box]",
       ].join(" ")}
     >

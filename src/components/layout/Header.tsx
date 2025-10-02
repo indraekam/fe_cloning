@@ -8,7 +8,6 @@ import { Button } from "@/components/ui/button"
 import { NAV_ITEMS } from "@/data/nav"
 import MobileNav from "./MobileNav"
 
-// ...imports
 export default function Header() {
   const pathname = usePathname() || "/"
 

@@ -1,11 +1,12 @@
 "use client";
 
-/**
- * HowItWorks — tiga langkah dengan angka besar samar di belakang,
- * panah antar langkah (muncul di md+), dan CTA di bawah.
- * Menggunakan token: text-foreground, text-muted-foreground, bg-primary, text-primary-foreground.
- * Tidak butuh import library tambahan.
- */
+import { Inter as FontInter } from 'next/font/google';
+
+const inter200 = FontInter({
+  weight: '200',          
+  subsets: ['latin'],
+  display: 'swap',
+});
 
 type Step = { title: string; description?: string };
 
@@ -25,11 +26,14 @@ const STEPS: Step[] = [
   },
 ];
 
-function Arrow() {
+function Arrow({ dir = "right" as "right" | "down" }) {
   return (
     <svg
       viewBox="0 0 24 24"
-      className="w-6 h-6 text-foreground/30"
+      className={[
+        "w-11 h-11 text-foreground/30",
+        dir === "down" ? "rotate-90" : "",
+      ].join(" ")}
       fill="none"
       stroke="currentColor"
       strokeWidth="2"
@@ -44,6 +48,7 @@ function Arrow() {
   );
 }
 
+
 function StepItem({
   index,
   step,
@@ -53,12 +58,21 @@ function StepItem({
 }) {
   return (
     <div className="relative flex-1 min-w-0 text-center">
-      {/* Angka besar samar (ikut light/dark via text-foreground/opacity) */}
+      {/* Angka besar */}
       <div
         aria-hidden
         className="pointer-events-none select-none absolute inset-x-0 -top-10 md:-top-12 text-center leading-none font-extralight text-foreground/10"
       >
-        <span className="text-[120px] md:text-[160px]">
+        <span
+          className={[
+            inter200.className,
+            "block",
+            "text-[128px] md:text-[160px]",
+            "leading-[128px] md:leading-[160px]",
+            "font-extralight",
+            "tracking-normal",
+          ].join(" ")}
+        >
           {String(index + 1).padStart(2, "0")}
         </span>
       </div>
@@ -105,20 +119,30 @@ export default function HowItWorks() {
       <div className="mt-14 md:mt-20 flex flex-col md:flex-row md:items-start md:justify-between gap-12 md:gap-6">
         <StepItem index={0} step={STEPS[0]} />
 
-        {/* Arrow (desktop only) */}
-        <div className="hidden md:flex items-center justify-center flex-none px-2">
-          <Arrow />
+        {/* Arrow: mobile (bawah) */}
+        <div className="flex pb-5 md:hidden items-center justify-center">
+          <Arrow dir="down" />
+        </div>
+        {/* Arrow: desktop (kanan) */}
+        <div className="hidden md:flex items-center justify-center flex-none px-2 mt-[70px]">
+          <Arrow dir="right" />
         </div>
 
         <StepItem index={1} step={STEPS[1]} />
 
-        {/* Arrow (desktop only) */}
-        <div className="hidden md:flex items-center justify-center flex-none px-2">
-          <Arrow />
+        {/* Arrow: mobile (bawah) */}
+        <div className="flex pb-5 md:hidden items-center justify-center">
+          <Arrow dir="down" />
+        </div>
+        {/* Arrow: desktop (kanan) */}
+        <div className="hidden md:flex items-center justify-center flex-none px-2 mt-[70px]">
+          <Arrow dir="right" />
         </div>
 
         <StepItem index={2} step={STEPS[2]} />
       </div>
+
+
 
       {/* CTA */}
       <div className="mt-12 md:mt-16 flex justify-center">

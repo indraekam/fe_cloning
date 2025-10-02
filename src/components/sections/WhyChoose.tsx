@@ -42,7 +42,7 @@ const COPY = {
         title: "More than Marketplace",
         description:
           "Not just a marketplace—Velogo is a full AI platform with integrated tools to help your business grow.",
-        icon: "/icons/why-choose/whatsapp-light.svg",
+        icon: "/icons/why-choose/more-light.svg",
       },
     ] as Feature[],
   },
@@ -80,6 +80,12 @@ const COPY = {
 
 /* --------------------------- Reusable FeatureCard -------------------------- */
 function FeatureCard({ feature }: { feature: Feature }) {
+  
+  const lightIcon = feature.icon;
+  const darkIcon = lightIcon.endsWith(".svg")
+    ? lightIcon.replace("-light.svg", "-dark.svg")
+    : lightIcon;
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 18 }}
@@ -90,15 +96,51 @@ function FeatureCard({ feature }: { feature: Feature }) {
     >
       <div className="wc-card w-full shadow-md/40 min-h-[183px]">
         <div className="flex items-center gap-2">
+          {/* Light icon */}
           <Image
-            src={feature.icon}
+            src={lightIcon}
             width={36}
             height={36}
-            alt={""}
+            alt=""
+            className="dark:hidden"
           />
-          <h3 className="font-[20px] font-semibold text-foreground">{feature.title}</h3>
+          {/* Dark icon  */}
+          <Image
+            src={darkIcon}
+            width={36}
+            height={36}
+            alt=""
+            className="hidden dark:inline-block"
+          />
+
+          {/* Title */}
+          <h3
+            className={[
+              "[font-family:var(--font-geist-sans)]",
+              "font-semibold",
+              "text-[16px] md:text-[20px]",
+              "leading-[150%]",
+              "tracking-[0.01em]",
+              "text-foreground",
+            ].join(" ")}
+          >
+            {feature.title}
+          </h3>
         </div>
-        <p className="font-[14px] text-foreground mt-[24px] p-0">
+
+        {/* Description */}
+        <p
+          className={[
+            "[font-family:var(--font-geist-sans)]",
+            "font-normal",
+            "text-[16px] md:text-[14px]",
+            "leading-[150%]",
+            "tracking-[-0.0025em] md:tracking-[0.01em]",
+            "align-middle",
+            "text-foreground",
+            "mt-[24px] p-0",
+          ].join(" ")}
+        >
           {feature.description}
         </p>
       </div>
@@ -107,11 +149,12 @@ function FeatureCard({ feature }: { feature: Feature }) {
 }
 
 
+
 /* --------------------------- Decorative Background ------------------------- */
 function BackgroundLayer() {
   return (
     <>
-      {/* Watermark (light only, hilang di dark) */}
+      {/* Watermark */}
       <div className="pointer-events-none absolute inset-0 z-[2]">
         <div
           aria-hidden
@@ -145,14 +188,23 @@ export default function WhyChoose({
       id="why-velogo"
       className={[
         "relative overflow-hidden section-anchor",
-        "w-full section-blue-radial",
+        "w-full section-blue-radial section-oval-glow",
         "min-h-[836px] pb-[120px]",
         className ?? "",
       ].join(" ")}
+      style={
+        {
+          // @ts-ignore
+          "--oval-w": "1400px",
+          "--oval-h": "360px",
+          "--oval-blur": "25px",
+          "--oval-shift-y": "-10px",
+        }
+      }
     >
       <BackgroundLayer />
 
-      {/* content wrapper (centered, max 1440px) */}
+      {/* content wrapper*/}
       <div className="app-container max-w-[1440px] mx-auto relative z-10 h-full  px-4 md:px-6">
         {/* Heading */}
         <div className="text-center max-w-3xl mx-auto mt-[120px]">
@@ -164,7 +216,7 @@ export default function WhyChoose({
           </p>
         </div>
 
-        {/* Grid – jarak 88px */}
+        {/* Grid  */}
         <div className="mt-[88px] grid gap-x-10 gap-y-10 
         grid-cols-1 md:grid-cols-2 place-items-stretch">
           {FEATURES.map((f) => (

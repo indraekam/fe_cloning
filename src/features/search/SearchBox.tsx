@@ -12,7 +12,6 @@ export default function SearchBox() {
   const [tab, setTab] = useState<"ask" | "quick">("ask")
   const boxRef = useRef<HTMLDivElement>(null)
 
-  // Scroll helper (tetap sama seperti sebelumnya)
   useEffect(() => {
     const id = window.requestAnimationFrame(() => {
       if (tab === "quick") {
@@ -40,9 +39,8 @@ export default function SearchBox() {
 
   return (
     <div ref={boxRef} className="w-full max-w-3xl">
-      {/* Bingkai biru utama */}
       <div className="rounded-2xl bg-primary text-primary-foreground shadow-lg overflow-hidden">
-        {/* === HEADER RESPONSIVE (mobile center, md+ row) === */}
+        {/* HEADER  */}
         <div
           className="
     px-4 md:pl-6 md:pr-0 py-4
@@ -51,12 +49,12 @@ export default function SearchBox() {
     gap-3 md:gap-4
   "
         >
-          {/* Title: 14px mobile (center), 16px md+ (left) */}
+          {/* Title */}
           <div className="text-[14px] md:text-[16px] font-semibold text-center md:text-left">
             Hi, what can velogo help you with?
           </div>
 
-          {/* Tabs: full width & centered on mobile, pushed right on md+ */}
+          {/* Tabs */}
           <Tabs
             value={tab}
             onValueChange={(v) => setTab(v as any)}
@@ -99,20 +97,20 @@ export default function SearchBox() {
 
 
 
-        {/* === BODY: PUTIH SEMUA === */}
+        {/* BODY */}
         <div className="bg-white dark:bg-black dark:text-white rounded-b-2xl p-4">
           <Tabs value={tab} onValueChange={(v) => setTab(v as any)} className="w-full">
-            {/* ASK (tetap putih) */}
+
             <TabsContent value="ask" className="mt-0">
               <form
                 className="p-4"
                 onSubmit={(e) => {
                   e.preventDefault()
-                  // TODO: handle submit di sini
+
                 }}
               >
                 <div className="relative">
-                  {/* Input: tambah pr agar tidak ketutup tombol */}
+
                   <Input
                     placeholder="Enter an address, city, or property type..."
                     className="
@@ -121,7 +119,7 @@ export default function SearchBox() {
         "
                   />
 
-                  {/* Tombol: posisi di dalam input kanan */}
+                  {/* Tombol Send */}
                   <Button
                     type="submit"
                     size="icon"
@@ -139,7 +137,7 @@ export default function SearchBox() {
             </TabsContent>
 
 
-            {/* QUICK SEARCH (PUTIH SEMUA) */}
+            {/* QUICK SEARCH */}
             <TabsContent value="quick" className="mt-0">
               <QuickSearchForm />
             </TabsContent>

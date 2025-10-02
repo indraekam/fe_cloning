@@ -16,14 +16,14 @@ import ModeToggle from "./ModeToggle"
 export default function MobileNav() {
   return (
     <Sheet>
-      {/* Trigger (kanan header) → 56×56px */}
+      {/* Trigger (kanan header) */}
       <SheetTrigger asChild>
         <button
           type="button"
           aria-label="Open menu"
           className="h-14 w-14 p-0 rounded-md"
         >
-          {/* theme-aware icon, full area */}
+
           <img src="/icons/menu-dark.svg"  className="block dark:hidden w-full h-full" alt="" />
           <img src="/icons/menu-light.svg" className="hidden dark:block w-full h-full" alt="" />
         </button>
@@ -35,15 +35,13 @@ export default function MobileNav() {
         showClose={false}
         className="h-dvh w-full p-0 border-none bg-background/95 backdrop-blur"
       >
-        {/* A11y title (tidak terlihat, tapi terdeteksi Radix) */}
         <VisuallyHidden>
           <SheetTitle>Main navigation</SheetTitle>
         </VisuallyHidden>
 
-        {/* Top bar — match header: 104px, logo 50×50, close 56×56 */}
+        {/* Top bar */}
         <div className="app-container flex h-[104px] items-center justify-between border-b">
           <Link href="/" className="inline-flex items-center gap-2" aria-label="Velogo Home">
-            {/* 50×50, theme-aware */}
             <img
               src="/icons/logo-dark.svg"
               alt="Velogo"
@@ -60,7 +58,7 @@ export default function MobileNav() {
             />
           </Link>
 
-          {/* Close custom → 56×56 */}
+          {/* Close Sheet */}
           <SheetClose asChild>
             <button
               type="button"
@@ -94,7 +92,7 @@ export default function MobileNav() {
           </SheetClose>
         </div>
 
-        {/* Theme toggle di kanan bawah (biar konsisten dengan mobile UX-mu) */}
+        {/* Theme toggle di kanan bawah */}
         <div className="absolute bottom-6 right-6">
           <ModeToggle />
         </div>
