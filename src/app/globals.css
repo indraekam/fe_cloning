@@ -469,3 +469,139 @@
 @utility container-max {
   @apply mx-auto w-full max-w-[1200px] px-4 md:px-6 lg:px-8;
 }
+
+/* === CTA surface sesuai Figma (#f5f5f5) =============================== */
+/* surface abu muda sesuai figma */
+@utility cta-surface-gray { background-color:#f5f5f5; }
+.dark .cta-surface-gray   { background-color:hsl(var(--color-background)); }
+
+/* GRID di dalam satu ELLIPSE (fixed, clean) */
+/* GRID di dalam satu ELLIPSE: inti tajam + tepi blur memudar */
+/* GRID elips: inti tipis + fade yang lebih panjang */
+@utility grid-ellipse-figma {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* INTI (tajam tapi tipis) */
+.grid-ellipse-figma::before{
+  content:"";
+  position:absolute;
+  left:50%;
+  top:56px;
+  transform:translateX(-50%);
+  width:var(--e-w, 1040px);
+  height:var(--e-h, 400px);
+
+  /* garis 1px + kontras lebih rendah */
+  background-image:
+    linear-gradient(to right, rgba(0,0,0,0.14) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0,0,0,0.14) 1px, transparent 1px);
+  background-size: var(--cell, 52px) var(--cell, 52px);
+  background-position:center;
+
+  /* fade LEBIH PANJANG (mulai memudar dari lebih dalam) */
+  -webkit-mask: radial-gradient(ellipse at center,
+    #000 0%, #000 30%, rgba(0,0,0,0.5) 50%, transparent 100%);
+          mask: radial-gradient(ellipse at center,
+    #000 0%, #000 30%, rgba(0,0,0,0.5) 50%, transparent 100%);
+}
+
+/* TEPI (kabur, memperpanjang pudarnya) */
+.grid-ellipse-figma::after{
+  content:"";
+  position:absolute;
+  left:50%;
+  top:56px;
+  transform:translateX(-50%);
+  width:var(--e-w, 1040px);
+  height:var(--e-h, 400px);
+
+  /* garis 1px lebih tipis + opacity lebih kecil */
+  background-image:
+    linear-gradient(to right, rgba(0,0,0,0.10) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0,0,0,0.10) 1px, transparent 1px);
+  background-size: var(--cell, 52px) var(--cell, 52px);
+  background-position:center;
+
+  /* blur & ring lebih lebar untuk memanjangkan fade */
+  filter: blur(5px);
+  opacity: .9;
+  -webkit-mask: radial-gradient(ellipse at center,
+    transparent 0%, transparent 46%, #000 70%, transparent 100%);
+          mask: radial-gradient(ellipse at center,
+    transparent 0%, transparent 46%, #000 70%, transparent 100%);
+}
+
+/* Dark mode (kontras disesuaikan, tetap 1px) */
+.dark .grid-ellipse-figma::before{
+  background-image:
+    linear-gradient(to right, rgba(255,255,255,0.22) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255,255,255,0.22) 1px, transparent 1px);
+}
+.dark .grid-ellipse-figma::after{
+  background-image:
+    linear-gradient(to right, rgba(255,255,255,0.16) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255,255,255,0.16) 1px, transparent 1px);
+}
+
+
+@layer utilities {
+  /* --- FOOTER BAR (Figma spec) --- */
+  .footer-bar {
+    background-color: #121212;          /* var(--Color-Monochrome-Black) */
+    position: relative;                  /* buat top gradient line */
+  }
+
+  /* tinggi area */
+  .footer-h { height: 53px; }           /* mobile & tablet */
+  @media (min-width: 1024px) {
+    .footer-h { height: 56px; }         /* laptop */
+  }
+
+  /* padding: 16px top/bottom, 40px tablet/hp, 180px laptop */
+  .footer-pad {
+    padding-block: 16px;
+    padding-inline: 40px;
+  }
+  @media (min-width: 1024px) {
+    .footer-pad { padding-inline: 180px; }
+  }
+
+  /* garis gradien 1px di sisi atas (sesuai border-image figma) */
+  .footer-top-gradient::before {
+    content: "";
+    position: absolute;
+    inset: 0 auto auto 0;
+    height: 1px;
+    width: 100%;
+    background: linear-gradient(
+      90deg,
+      rgba(0,0,0,0.16) 0%,
+      rgba(255,255,255,0.16) 50%,
+      rgba(0,0,0,0.16) 100%
+    );
+  }
+
+  /* (opsional) kalau butuh garis solid #000 juga, aktifkan border-top di element */
+  .footer-border-solid { border-top: 1px solid #000; }
+
+  /* tipografi copyright (Geist) */
+  .footer-copy {
+    font-family: var(--font-geist-sans, inherit);
+    font-weight: 400;
+    line-height: 150%;
+    letter-spacing: 0.01em;   /* tablet & hp */
+    font-size: 14px;
+    color: rgba(255,255,255,0.80);
+    text-align: center;
+  }
+  @media (min-width: 1024px) {
+    .footer-copy {
+      font-size: 16px; 
+      letter-spacing: -0.0025em; /* -0.25% */
+    }
+  }
+}
