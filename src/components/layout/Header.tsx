@@ -13,15 +13,11 @@ export default function Header() {
 
   return (
     <header className="fixed inset-x-0 top-0 z-50">
-      {/* full-bleed glass strip */}
       <div className="glass border-b">
-        {/* ⬇️ full width row, no max-width container */}
         <div
           className={[
             "relative flex h-[104px] items-center justify-between",
-            // kontrol padding kiri/kanan per breakpoint (atur sesuka Figma-mu)
             "px-4 sm:px-6 md:px-8 lg:px-10 xl:px-[180px]",
-            // aman untuk notch (opsional)
             "pl-[calc(env(safe-area-inset-left)+1rem)] pr-[calc(env(safe-area-inset-right)+1rem)]",
           ].join(" ")}
         >
@@ -30,7 +26,7 @@ export default function Header() {
             <Logo />
           </div>
 
-          {/* CENTER (≥lg) – tetap center absolute terhadap parent full-width */}
+          {/* CENTER (≥lg)  */}
           <nav
             className="
               absolute left-1/2 top-1/2 hidden -translate-x-1/2 -translate-y-1/2 lg:block
