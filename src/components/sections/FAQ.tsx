@@ -39,7 +39,7 @@ export default function Faq({
     <section id="faq" className={`section-wrap section-anchor ${className}`}>
       <div className="mx-auto w-full max-w-[1200px] px-4 md:px-6 lg:px-8">
         <div className="text-center mb-8 md:mb-10">
-          <span className="block mb-2 text-[14px] md:text-[16px] text-muted-foreground">FAQ</span>
+          <span className="block mb-2 text-[16px] md:text-[24px] text-muted-foreground">FAQ</span>
           <h2 className="heading-page text-foreground">Frequently Asked Question</h2>
         </div>
 
