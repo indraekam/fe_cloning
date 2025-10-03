@@ -1,8 +1,6 @@
 /* Tailwind v4 entry */
 @import "tailwindcss";
 
-/* (opsional) animasi untuk komponen shadcn */
-/* @plugin "tailwindcss-animate"; */
 
 /* Aktifkan dark: modifier berbasis class .dark pada <html> */
 @custom-variant dark (&:where(.dark, .dark *));

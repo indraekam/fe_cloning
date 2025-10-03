@@ -48,23 +48,23 @@ export default function Testimonials() {
     const el = trackRef.current;
     if (!el) return;
     const card = el.querySelector<HTMLElement>("[data-card]");
-    const step = card ? card.offsetWidth + 24 : 320;
+    const gap = parseFloat(getComputedStyle(el).columnGap || "0") || 0;
+    const step = (card?.offsetWidth ?? 320) + gap;
     el.scrollBy({ left: dir === "left" ? -step : step, behavior: "smooth" });
   };
 
   return (
-    <section id="testimonials" className="container mx-auto py-16 md:py-20">
+    <section id="testimonials" className="py-16 md:py-20 px-4 sm:px-6">
       {/* WRAPPER */}
       <div
         className={[
           "max-w-[1280px] w-full min-h-[634px] mx-auto",
-          "rounded-[32px] p-1 md:p-10 border border-transparent",
+          "rounded-[32px] p-4 sm:p-6 md:p-10 border border-transparent",
           "[background:linear-gradient(226.86deg,#E6EFFF_-95.15%,#F9F9F9_57.72%)_padding-box,linear-gradient(135.88deg,#FFFFFF_-24.8%,#D6D6D6_55.55%)_border-box]",
           "backdrop-blur-[40px]",
           "shadow-[0_12px_40px_rgba(0,0,0,0.06)]",
-          "dark:bg-transparent dark:border-white/10 dark:backdrop-blur-md",
-          "dark:bg-[rgba(255,255,255,0.06)]",
-          "flex flex-col space-y-20",
+          "dark:bg-[rgba(255,255,255,0.06)] dark:border-white/10 dark:backdrop-blur-md",
+          "flex flex-col gap-10 md:gap-20",
         ].join(" ")}
       >
         {/* header */}
@@ -81,12 +81,14 @@ export default function Testimonials() {
         <div className="relative">
           <div
             ref={trackRef}
-            className={["flex gap-[20px] overflow-x-auto no-scrollbar pl-0 pr-0", "snap-x snap-mandatory pb-2 px-3 scroll-px-3 rounded-[32px]",
-              "[background:linear-gradient(226.86deg,#E6EFFF_-95.15%,#F9F9F9_57.72%)_padding-box,linear-gradient(135.88deg,#FFFFFF_-24.8%,#D6D6D6_55.55%)_border-box]",
-              "backdrop-blur-[40px]",
-              "shadow-[0_12px_40px_rgba(0,0,0,0.03)]",
-            ].join(" ")}
             aria-label="Testimonials"
+            className={[
+              // gunakan gutters & snap yang konsisten di mobile
+              "flex gap-[20px] overflow-x-auto no-scrollbar",
+              "gap-0 sm:gap-[20px]",
+              "scroll-px-4 px-1", // gutters agar kartu tidak nempel tepi
+              "snap-x snap-mandatory pb-2 rounded-[32px]",
+            ].join(" ")}
           >
             {ITEMS.map((t, i) => (
               <TestimonialCard key={t.name + i} data-card t={t} />
@@ -127,17 +129,15 @@ function TestimonialCard({
       className={[
         // ukuran Figma + fallback mobile
         "snap-start shrink-0 h-[312px]",
-        "w-[calc(100%-56px)] sm:w-[386px] basis-[calc(100%-56px)] sm:basis-[386px]",
+        "w-full basis-full sm:w-[386px] sm:basis-[386px]",
         "rounded-[16px] border border-transparent",
         "[background:linear-gradient(195.05deg,rgba(255,255,255,.03)_0%,rgba(17,142,234,.02)_50%,rgba(255,255,255,.06)_100%)_padding-box,linear-gradient(#fff,#fff)_padding-box,linear-gradient(180deg,#E3E3E3_0%,#D7D7D7_100%)_border-box]",
         "shadow-[2px_4px_24px_8px_rgba(0,0,0,.04)]",
         "dark:[background:linear-gradient(195.05deg,rgba(255,255,255,.03)_0%,rgba(17,142,234,.02)_50%,rgba(255,255,255,.06)_100%)_padding-box,linear-gradient(#111,#111)_padding-box,linear-gradient(180deg,#3A3A3A_0%,#2D2D2D_100%)_border-box]",
       ].join(" ")}
     >
-      {/* padding 32px (Spacing/32) + GAP 24px antar blok */}
       <CardContent className="p-8 h-full">
         <div className="flex h-full flex-col gap-[20px]">
-          {/* header (avatar + nama/role + rating) */}
           <div className="flex items-center gap-6">
             <div className="relative h-12 w-12 rounded-full overflow-hidden shrink-0">
               <Image
@@ -163,7 +163,6 @@ function TestimonialCard({
             </div>
           </div>
 
-          {/* quote */}
           <p className="text-[15px] leading-6 text-neutral-700 dark:text-neutral-300 line-clamp-[7]">
             “{t.quote}”
           </p>
@@ -172,4 +171,3 @@ function TestimonialCard({
     </Card>
   );
 }
-
