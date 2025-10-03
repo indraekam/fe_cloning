@@ -104,7 +104,7 @@ export default function Faq({
         </Accordion>
 
         <div className="mt-8 md:mt-10">
-          <button className="btn-primary rounded-md-token px-5 py-3">Submit another question</button>
+          <button className="btn-primary rounded-md-token px-5 py-3 w-[291px]">Submit another question</button>
         </div>
       </div>
     </section>
