@@ -66,7 +66,7 @@ export default function MainFeature() {
             <span className="block mx-auto mb-2 text-[16px] sm:text-[18px] text-neutral-400">
               Powered by Velogo AI
             </span>
-            <h2 id="main-feature-title" className="heading-page dark:text-white">Main Feature</h2>
+            <h2 id="main-feature-title" className="heading-page dark:text-white mb-[80px]">Main Feature</h2>
           </div>
 
           {/* Grid */}

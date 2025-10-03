@@ -160,10 +160,10 @@ function Stat({ label, value, suffix = "", start }: StatItem & { start: boolean 
 
   return (
     <div className="flex flex-col items-center">
-      <div className="text-[40px] md:text-[40px] lg:tex-[64px] font-bold leading-none text-black dark:text-white">
+      <div className="text-[40px] md:text-[64px] lg:tex-[64px] font-bold leading-none text-black dark:text-white">
         {display}
       </div>
-      <div className="mt-2 text-[24px] md:text-[16px] lg:text-[24px] text-foreground/70">
+      <div className="mt-2 text-[24px] md:text-[24px] lg:text-[24px] text-foreground/70">
         {label}
       </div>
     </div>

@@ -116,7 +116,7 @@ export default function HowItWorks() {
       </div>
 
       {/* Steps */}
-      <div className="mt-14 md:mt-20 flex flex-col md:flex-row md:items-start md:justify-between gap-12 md:gap-6">
+      <div className="mt-20 md:mt-40 flex flex-col md:flex-row md:items-start md:justify-between gap-12 md:gap-6">
         <StepItem index={0} step={STEPS[0]} />
 
         {/* Arrow: mobile (bawah) */}
@@ -150,7 +150,7 @@ export default function HowItWorks() {
           type="button"
           className={[
             "inline-flex items-center justify-center",
-            "rounded-full px-6 md:px-8 h-12",
+            "rounded-2xl px-6 md:px-8 h-12 w-[329px]",
             "bg-primary text-primary-foreground",
             "shadow-[0_8px_24px_rgba(0,0,0,0.08)]",
             "transition-transform hover:-translate-y-0.5 active:translate-y-0",
