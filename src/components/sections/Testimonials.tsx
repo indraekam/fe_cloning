@@ -63,13 +63,15 @@ export default function Testimonials() {
           "[background:linear-gradient(226.86deg,#E6EFFF_-95.15%,#F9F9F9_57.72%)_padding-box,linear-gradient(135.88deg,#FFFFFF_-24.8%,#D6D6D6_55.55%)_border-box]",
           "backdrop-blur-[40px]",
           "shadow-[0_12px_40px_rgba(0,0,0,0.06)]",
-          "dark:bg-[rgba(255,255,255,0.06)] dark:border-white/10 dark:backdrop-blur-md",
+          "dark:bg-transparent dark:bg-[linear-gradient(195deg,rgba(43,255,255,0.10)_0%,rgba(43,255,255,0.02)_50%,rgba(43,255,255,0.06)_100%)]",
+          "dark:backdrop-blur-[84px]",
+          "border dark:border-[#2F2F2F]",
           "flex flex-col gap-10 md:gap-20",
         ].join(" ")}
       >
         {/* header */}
         <div className="text-center">
-          <p className="text-2xl md:text-base text-neutral-500 dark:text-neutral-400">
+          <p className="text-4 md:text-2xl text-neutral-500 dark:text-neutral-400">
             Testimonials
           </p>
           <h2 className="heading-page text-foreground">
@@ -78,16 +80,15 @@ export default function Testimonials() {
         </div>
 
         {/* slider + controls */}
-        <div className="relative">
+        <div className="relative ">
           <div
             ref={trackRef}
             aria-label="Testimonials"
             className={[
-              // gunakan gutters & snap yang konsisten di mobile
               "flex gap-[20px] overflow-x-auto no-scrollbar",
               "gap-0 sm:gap-[20px]",
-              "scroll-px-4 px-1", // gutters agar kartu tidak nempel tepi
-              "snap-x snap-mandatory pb-2 rounded-[32px]",
+              "scroll-px-4 px-1",
+              "snap-x snap-mandatory pb-2 rounded-[16px]",
             ].join(" ")}
           >
             {ITEMS.map((t, i) => (
@@ -127,12 +128,19 @@ function TestimonialCard({
     <Card
       {...rest}
       className={[
-        "snap-start shrink-0 h-[312px]",
+        "snap-start shrink-0 min-h-[312px]",
         "w-full basis-full sm:w-[386px] sm:basis-[386px]",
         "rounded-[16px] border border-transparent",
         "[background:linear-gradient(195.05deg,rgba(255,255,255,.03)_0%,rgba(17,142,234,.02)_50%,rgba(255,255,255,.06)_100%)_padding-box,linear-gradient(#fff,#fff)_padding-box,linear-gradient(180deg,#E3E3E3_0%,#D7D7D7_100%)_border-box]",
         "shadow-[2px_4px_24px_8px_rgba(0,0,0,.04)]",
-        "dark:[background:linear-gradient(195.05deg,rgba(255,255,255,.03)_0%,rgba(17,142,234,.02)_50%,rgba(255,255,255,.06)_100%)_padding-box,linear-gradient(#111,#111)_padding-box,linear-gradient(180deg,#3A3A3A_0%,#2D2D2D_100%)_border-box]",
+        "dark:border dark:border-solid dark:rounded-[16px]",
+        "dark:[background:linear-gradient(180deg,rgba(8,97,187,0.03)_0%,rgba(8,97,187,0.05)_50%,rgba(8,97,187,0.07)_100%)_padding-box]",
+        "dark:border dark:border-[rgba(43,255,255,0.2)]",
+        "dark:[border-image-slice:1]",
+        "dark:[background-clip:padding-box,border-box]",
+        "dark:backdrop-blur-[84px]",
+        "dark:shadow-[0_0_0_1px_rgba(43,255,255,0.06)_inset,0_10px_30px_rgba(0,0,0,0.35)]",
+        "dark:hover:[background:linear-gradient(180deg,rgba(8,97,187,0.08)_0%,rgba(8,97,187,0.12)_50%,rgba(8,97,187,0.18)_100%)_padding-box,linear-gradient(180deg,rgba(43,255,255,0.32)_0%,rgba(43,255,255,0.10)_50%,rgba(43,255,255,0.16)_100%)_border-box]",
       ].join(" ")}
     >
       <CardContent className="p-8 h-full">
