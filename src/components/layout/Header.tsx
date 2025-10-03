@@ -13,13 +13,24 @@ export default function Header() {
 
   return (
     <header className="fixed inset-x-0 top-0 z-50">
+      {/* full-bleed glass strip */}
       <div className="glass border-b">
-        {/* ⬇️ h-[104px] */}
-        <div className="app-container relative flex h-[104px] items-center justify-between">
+        {/* ⬇️ full width row, no max-width container */}
+        <div
+          className={[
+            "relative flex h-[104px] items-center justify-between",
+            // kontrol padding kiri/kanan per breakpoint (atur sesuka Figma-mu)
+            "px-4 sm:px-6 md:px-8 lg:px-10 xl:px-[180px]",
+            // aman untuk notch (opsional)
+            "pl-[calc(env(safe-area-inset-left)+1rem)] pr-[calc(env(safe-area-inset-right)+1rem)]",
+          ].join(" ")}
+        >
           {/* LEFT */}
-          <Logo />
+          <div className="shrink-0">
+            <Logo />
+          </div>
 
-          {/* CENTER (≥lg) */}
+          {/* CENTER (≥lg) – tetap center absolute terhadap parent full-width */}
           <nav
             className="
               absolute left-1/2 top-1/2 hidden -translate-x-1/2 -translate-y-1/2 lg:block
@@ -50,12 +61,8 @@ export default function Header() {
 
           {/* RIGHT (≥lg) */}
           <div className="hidden items-center gap-3 lg:flex">
-            {/* 56×56 */}
             <ModeToggle />
-            {/* 128×56 */}
-            <Button className="h-14 w-[128px] rounded-md text-base font-medium">
-              Log In
-            </Button>
+            <Button className="h-14 w-[128px] rounded-md text-base font-medium">Log In</Button>
           </div>
 
           {/* MOBILE/TABLET (<lg) */}
