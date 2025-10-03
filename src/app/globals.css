@@ -627,7 +627,7 @@
 
   /* tinggi area */
   .footer-h {
-    height: 53px;
+    min-height: 53px;
   }
 
   /* mobile & tablet */
