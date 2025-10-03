@@ -16,10 +16,13 @@ type FaqProps = {
 };
 
 const DEFAULT_ITEMS: FaqItem[] = [
-  { q: "How does Velogo.AI support property agents?", a: <>Velogo.AI streamlines lead capture…</> },
-  { q: "Can individuals use Velogo too?", a: <>Bisa. Velogo.AI dirancang untuk perorangan…</> },
+  { q: "How does Velogo.AI support property agents?", a: <>Velogo acts like your assistant, helping you automate tasks, find suitable properties, promote your listings, generate leads, and coordinate workflows. In short, Velogo saves you time, allows you to respond faster, and ensures you never miss an opportunity.</> },
+  {
+    q: "Can individuals use Velogo too?", a: <>
+      Ya, Velogo tidak hanya untuk agen properti. Sebagai individu, Anda bisa memakainya seperti layaknya marketplace, cukup ketik properti yang dicari,lokasi, budget, atau preferensi khusus, dan Velogo akan menampilkan hasil yang paling relevan.</>
+  },
   { q: "How do I join the Velogo AI, and what does it cost?", a: <>Velogo.AI is currently in a closed Beta program. You can request an invite by joining our waiting list. We’re gradually onboarding new users to ensure a great experience for everyone. During the Beta, all core features are free to use.</> },
-  { q: "Is my data safe with Velogo?", a: <>Ya. Enkripsi in-transit & at-rest…</> },
+  { q: "Is my data safe with Velogo?", a: <>Of course, we take data security very seriously. All your information on Velogo is encrypted and kept confidential. We will never share your listings, client information, or any other data with parties outside of Velogo without your permission.</> },
 ];
 
 export default function Faq({
@@ -48,11 +51,17 @@ export default function Faq({
                 key={value}
                 value={value}
                 className={[
-                  "border rounded-[16px] bg-card text-card-foreground",
+                  "relative overflow-hidden",
+                  "rounded-[16px] bg-card text-card-foreground",
+                  "border border-border",
                   "data-[state=open]:bg-[#E8F1FF] dark:data-[state=open]:bg-primary/10",
                   "data-[state=open]:border-primary/30",
+                  "last:after:content-[''] last:after:absolute",
+                  "last:after:left-0 last:after:right-0 last:after:bottom-0",
+                  "last:after:h-px last:after:bg-border",
                 ].join(" ")}
               >
+
                 {/* Trigger */}
                 <AccordionTrigger
                   className={[
@@ -70,12 +79,20 @@ export default function Faq({
                 {/* Content */}
                 <AccordionContent
                   className={[
-                    "px-0 pb-5 md:pb-6 pt-0", 
+                    "px-0 pb-5 md:pb-6 pt-0",
                     "text-[14px] md:text-[16px] leading-relaxed",
+                    "group",
                   ].join(" ")}
                 >
                   {/* separator muncul saat open */}
-                  <div className="mx-5 md:mx-6 border-t data-[state=open]:border-primary/20 dark:data-[state=open]:border-primary/25 data-[state=closed]:border-transparent" />
+                  <div
+                    className={[
+                      "mx-5 md:mx-6 border-t",
+                      "group-data-[state=open]:border-primary/20",
+                      "dark:group-data-[state=open]:border-primary/25",
+                      "group-data-[state=closed]:border-transparent",
+                    ].join(" ")}
+                  />
 
                   <div className="px-5 md:px-6 pt-4 text-primary font-normal">
                     {it.a}

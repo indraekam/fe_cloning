@@ -30,15 +30,15 @@ export default function Hero() {
         {/* === CHIP === */}
         <div
           className="
-    inline-flex items-center justify-center gap-2
-    w-[270px] h-[37px]           /* mobile: 270x37 */
-    rounded-[32px]
-    bg-white/10 backdrop-blur-md
-    border border-cyan-300/40
-    shadow-[0_1px_0_0_rgba(255,255,255,0.6)_inset,0_1px_6px_rgba(0,0,0,0.08)]
-    md:w-auto md:h-auto          /* tablet+: kembali ke auto */
-    md:px-5 md:py-2.5
-  "
+            inline-flex items-center justify-center gap-2
+            w-[270px] h-[37px]           
+            rounded-[32px]
+            bg-white/10 backdrop-blur-md
+            border border-cyan-300/40
+            shadow-[0_1px_0_0_rgba(255,255,255,0.6)_inset,0_1px_6px_rgba(0,0,0,0.08)]
+            md:w-auto md:h-auto          
+            md:px-5 md:py-2.5
+          "
         >
           <img src="/icons/sparkle.svg" alt="" className="h-4 w-4 opacity-80 md:h-5 md:w-5" />
           <span

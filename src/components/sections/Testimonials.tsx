@@ -127,7 +127,6 @@ function TestimonialCard({
     <Card
       {...rest}
       className={[
-        // ukuran Figma + fallback mobile
         "snap-start shrink-0 h-[312px]",
         "w-full basis-full sm:w-[386px] sm:basis-[386px]",
         "rounded-[16px] border border-transparent",
