@@ -73,12 +73,12 @@ export default function PreFooter() {
             style={{ fontFamily: "var(--font-geist-sans, inherit)" }}
           >
             <li>
-              <a href="#home" className="hover:text-brand transition-colors">
+              <a href="#hero" className="hover:text-brand transition-colors">
                 Home
               </a>
             </li>
             <li>
-              <a href="#features" className="hover:text-brand transition-colors">
+              <a href="#main-feature" className="hover:text-brand transition-colors">
                 Feature
               </a>
             </li>
