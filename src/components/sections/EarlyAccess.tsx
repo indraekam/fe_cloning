@@ -85,7 +85,7 @@ export default function EarlyAccess() {
         </div>
 
         {/* Subcopy */}
-        <p className="mt-17 md:mt-15 mb-5 md:mb-7 text-center text-[14px] md:text-[16px] text-foreground/80">
+        <p className="mt-17 md:mt-15 mb-5 md:mb-7 text-center text-[16px] md:text-[24px] text-foreground/80">
           Ready to get started with Velogo?
         </p>
 
@@ -101,6 +101,7 @@ export default function EarlyAccess() {
               "gap-x-2",
               "rounded-[16px] border bg-primary text-primary-foreground",
               "shadow-md hover:brightness-110 transition",
+              "text-[14px] md:text-[16px]"
             ].join(" ")}
           >
             Join the Waiting List
@@ -119,6 +120,7 @@ export default function EarlyAccess() {
               "rounded-[16px] border border-[#25D366] text-[#25D366]",
               "bg-white dark:bg-white hover:bg-[#E9F9EF] dark:hover:bg-[#1f3527]",
               "transition shadow-sm",
+              "text-[14px] md:text-[16px]",
             ].join(" ")}
             aria-label="Connect via WhatsApp"
           >
